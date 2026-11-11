@@ -25,14 +25,15 @@ Scripts in `scripts/`, a small Node.js project (run `npm install` there once):
 
 ## How to use it
 
-1. Open this repo in Claude Code and tell Claude the name of the new project.
-2. You run `npm run new-project -- <name>` in `scripts/` (run `npm install` there once first), which creates `output/<name>/` with the folders, templates and skills.
-3. Run `/grill-with-docs` and describe the project. Claude fills in the docs from the interview.
-4. Claude tells you when `output/<name>/` is ready.
+1. In `scripts/`, run `npm install` once, then `npm run new-project -- <name>`. It creates `output/<name>/` with the folders, templates and skills.
+2. Start a Claude Code session in this repo and run `/grill-with-docs`. Describe the project and answer Claude's questions.
+3. Claude fills in the docs in `output/<name>/` from the interview.
+4. You and Claude review all the docs together, until everything is clear.
 5. Create the new GitHub repo, copy the contents of `output/<name>/` to its root and push it.
-6. Back in this repo, Claude proposes the milestones, stories and tasks. Once you approve them, Claude writes them as JSON files in `output/<name>.plan/`. In `scripts/`, you run `npm run setup-github -- <name> <owner>/<repo>` once (add `--dry-run` first to see what it will create): it checks the plan and creates the labels, milestones and issues in the new repo. It needs Node.js, `npm install` run once in `scripts/`, and the GitHub CLI (`gh`) logged in.
-7. Create a scheduled task on claude.ai for the new repo and paste the prompt from [templates/coder-task.md](templates/coder-task.md). Run it with **Run now**: it codes up to 5 issues, one pull request each.
-8. Create a second scheduled task with the settings and prompt from [templates/qa-task.md](templates/qa-task.md). It runs on its own when a pull request opens: it labels it `risk:low`, `risk:medium` or `risk:high` and comments a summary in Spanish and the details in English. It never merges.
+6. Claude proposes the milestones, stories and tasks. Once you approve them, Claude writes them as JSON files in `output/<name>.plan/`.
+7. In `scripts/`, you run `npm run setup-github -- <name> <owner>/<repo>` once (add `--dry-run` first to see what it will create): it checks the plan and creates the labels, milestones and issues in the new repo. It needs the GitHub CLI (`gh`) logged in.
+8. Create a scheduled task on claude.ai for the new repo and paste the prompt from [templates/coder-task.md](templates/coder-task.md). Run it with **Run now**: it codes up to 5 issues, one pull request each.
+9. Create a second scheduled task with the settings and prompt from [templates/qa-task.md](templates/qa-task.md). It runs on its own when a pull request opens: it labels it `risk:low`, `risk:medium` or `risk:high` and comments a summary in Spanish and the details in English. It never merges.
 
 [docs/start-checklist.md](docs/start-checklist.md) is your checklist: go through it to be sure you followed every step.
 
