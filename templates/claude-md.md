@@ -19,6 +19,14 @@
 - If a decision changes, add a new ADR in the same pull request.
 - When you create an issue through the GitHub connector, the issue forms are not applied: write the body with the same headings as the matching form in `.github/ISSUE_TEMPLATE/`.
 
+## Plan the work
+
+Before coding, once `docs/` is ready:
+
+1. Read `docs/` and propose the plan to Oscar: milestones as vertical slices, each with its "done", and the stories and tasks of each one. M0 is the foundation (repo, CI, smoke test); M1 is the thinnest slice that works end to end, checked with `docs/test-cases.md`. Create nothing on GitHub yet.
+2. When Oscar approves, fill in `MILESTONES` in `scripts/setup-github.sh`. Oscar runs it once; it creates the milestones (no due dates) and the labels.
+3. Create the issues with the GitHub connector: each story as a feature issue and each task as a sub-issue of its story, all in their milestone, with a `type:*` label and a `risk:*` label. Infra, auth, IAM, secrets, prompts and data deletion are always `risk:high`.
+
 ## Golden rules
 
 - {Project rule, linking its ADR.}

@@ -51,6 +51,10 @@ copy_template non-functional-requirements.md docs/requirements/non-functional.md
 copy_template test-cases.md                  docs/test-cases.md
 copy_template adr.md                         docs/adr/0000-template.md
 
+# Script that creates milestones and labels; Claude fills it in from the approved plan.
+cp "$kit_root/templates/setup-github.sh" "$target/scripts/setup-github.sh"
+chmod +x "$target/scripts/setup-github.sh"
+
 # GitHub issue forms, so every issue has the same fields.
 mkdir -p "$target/.github/ISSUE_TEMPLATE"
 cp "$kit_root"/templates/issue-templates/*.yml "$target/.github/ISSUE_TEMPLATE/"
