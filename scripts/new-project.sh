@@ -61,6 +61,9 @@ mkdir -p "$kit_root/output/$name.issues"
 mkdir -p "$target/.github/ISSUE_TEMPLATE"
 cp "$kit_root"/templates/issue-templates/*.yml "$target/.github/ISSUE_TEMPLATE/"
 
+# Pull request template: Spanish overview on top, English detail below.
+cp "$kit_root/templates/pull-request.md" "$target/.github/pull_request_template.md"
+
 # The skills travel with the project, with the lock file so they can be updated
 # later with `npx skills update`.
 cp -R "$kit_root/.claude/skills" "$target/.claude/skills"
