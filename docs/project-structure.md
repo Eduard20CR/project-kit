@@ -5,7 +5,7 @@ New projects use this folder structure. Folders marked "only if it applies" are 
 ```
 .claude/CLAUDE.md           rules for Claude
 .github/workflows/          CI and deploy
-README.md
+README.md                   what the app is, for non-technical readers
 apps/
   <app>/                    one folder per app the project needs, e.g. web/, api/, worker/
 shared/                     types and constants shared by the apps (only if it applies)
@@ -16,10 +16,8 @@ infra/
   environments/             one folder per environment (e.g. dev/, prod/)
 scripts/
 docs/
-  README.md                 scope by version and conventions
-  architecture.md           components, flows and repo structure
-  data-model.md             data model
-  c4.md                     C4 diagrams in Mermaid
+  architecture.md           components, C4 levels 1-2 in Mermaid, flows
+  data-model.md             Mermaid erDiagram
   test-cases.md             real examples with the expected result
   screens.md                only the important screens
   requirements/

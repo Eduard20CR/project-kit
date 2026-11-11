@@ -18,4 +18,4 @@ Templates in `templates/`: one per document, so every project's docs look the sa
 2. Run `/grill-with-docs` and describe the new project.
 3. Ask Claude to write the docs with `doc-coauthoring`.
 
-Claude follows [docs/documents.md](docs/documents.md) and [docs/project-structure.md](docs/project-structure.md).
+Claude follows [docs/documents.md](docs/documents.md), [docs/project-structure.md](docs/project-structure.md) and the templates in `templates/`.
