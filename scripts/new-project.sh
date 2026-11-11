@@ -29,6 +29,7 @@ folders=(
   docs/requirements
   docs/adr
   docs/spikes
+  docs/milestones
 )
 for folder in "${folders[@]}"; do
   mkdir -p "$target/$folder"
@@ -50,6 +51,7 @@ copy_template functional-requirements.md     docs/requirements/functional.md
 copy_template non-functional-requirements.md docs/requirements/non-functional.md
 copy_template test-cases.md                  docs/test-cases.md
 copy_template adr.md                         docs/adr/0000-template.md
+copy_template milestone-log.md               docs/milestones/template.md
 
 # Script that creates the labels, milestones and issues in the new repo. It stays in the kit
 # (outside the zip); Claude fills it in from the plan Oscar approves.
