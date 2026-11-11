@@ -18,7 +18,7 @@
 - Write the pull request body with `.github/pull_request_template.md`: the Overview in Spanish, the rest in English.
 - Run lint, typecheck and tests before pushing.
 - While coding a task, do not write docs, requirements, ADRs or issues. If a task needs a decision the docs do not cover, or the docs look wrong, do not decide: comment on the issue, add the `blocked` label and stop.
-- Create a new issue, or change docs, requirements or ADRs, only when Oscar explicitly asks for it:
+- Create a new issue, or change docs, requirements or ADRs, only when the user explicitly asks for it:
   - An issue uses the matching form in `.github/ISSUE_TEMPLATE/`, one `type:*` label and a milestone. Never put `risk:*` labels on issues: they are for pull requests.
   - Docs changes go through a pull request. A changed decision is a new ADR.
 - Write the milestone closing log in `docs/milestones/` only when asked to close a milestone.
