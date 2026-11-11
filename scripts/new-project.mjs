@@ -54,7 +54,6 @@ const templates = [
   ["data-model.md", "docs/data-model.md"],
   ["functional-requirements.md", "docs/requirements/functional.md"],
   ["non-functional-requirements.md", "docs/requirements/non-functional.md"],
-  ["test-cases.md", "docs/test-cases.md"],
   ["adr.md", "docs/adr/0000-template.md"],
   ["milestone-log.md", "docs/milestones/template.md"],
   // GitHub issue forms, so every issue has the same fields.

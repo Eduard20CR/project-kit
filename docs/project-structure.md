@@ -20,7 +20,6 @@ scripts/                    helper scripts
 docs/
   architecture.md           components, C4 levels 1-2 in Mermaid, flows, repo tree
   data-model.md             Mermaid erDiagram
-  test-cases.md             real examples with the expected result
   requirements/
     functional.md           FR-XX with acceptance criteria
     non-functional.md       NFR-<AREA>-XX
