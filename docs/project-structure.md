@@ -7,8 +7,7 @@ New projects use this folder structure. Folders marked "only if it applies" are 
 .github/workflows/          CI and deploy
 README.md
 apps/
-  web/                      frontend (src/, tests/)
-  api/                      backend (src/, tests/)
+  <app>/                    one folder per app the project needs, e.g. web/, api/, worker/
 shared/                     types and constants shared by the apps (only if it applies)
 db/                         database migrations, e.g. Liquibase (only if it applies)
 infra/
