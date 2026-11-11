@@ -9,7 +9,7 @@ This repo does all the work of a new project before any code is written: the int
 
 ## How to document a new project
 
-1. Run `scripts/new-project.sh <name>`. It creates `output/<name>/` with the folder structure, the templates in place and the skills.
+1. Run `node scripts/new-project.mjs <name>`. It creates `output/<name>/` with the folder structure, the templates in place and the skills.
 2. Run `/grill-with-docs` to interview the user about the project. It uses the `grilling` and `domain-modeling` skills.
 3. Fill in the files in `output/<name>/` from the interview, with the `doc-coauthoring` skill. Remove the template placeholders.
 4. Use the `skill-creator` skill if the new project needs its own skills.
@@ -20,11 +20,11 @@ This repo does all the work of a new project before any code is written: the int
       - The issues of each milestone. Each issue has one type: `feature` (a user story), `task` (technical work, one pull request) or `spike` (a time-boxed investigation).
       - The feature each task or spike belongs to. A task or spike may stand alone (for example, the M0 tasks).
    2. **Wait for the user's OK.** Change the plan until they approve it. Write no files before that.
-   3. **Write the plan as data** in `output/<name>.plan/`, which `scripts/new-project.sh` created with an example. Write no code and no Markdown files for the plan.
+   3. **Write the plan as data** in `output/<name>.plan/`, which `scripts/new-project.mjs` created with an example. Write no code and no Markdown files for the plan.
       - `milestones.json`: the approved milestones, as `{"id", "title", "done"}`.
       - `issues/`: one JSON file per issue (for example `01-feature.json`, `01-01-task.json`). Each one has `id`, `type` (`feature`, `task` or `spike`), `milestone` (a milestone id), `title`, and the fields of the matching form in `templates/issue-templates/`. `acceptance`, `references`, `files` and `depends_on` are lists. A task or spike that belongs to a feature has `feature` (the feature's id). `depends_on` lists ids from the plan.
       - Replace the example files. Leave no `{placeholder}` behind.
-   4. **Check the plan** (run `npm install` once in the kit first) with `node scripts/setup-github.mjs output/<name>.plan <owner>/<repo> --dry-run`. It checks every file, prints what it would create and touches nothing on GitHub. Fix the plan until it passes.
+   4. **Check the plan** (run `npm install` once in `scripts/` first) with `node scripts/setup-github.mjs output/<name>.plan <owner>/<repo> --dry-run`. It checks every file, prints what it would create and touches nothing on GitHub. Fix the plan until it passes.
    5. **Hand it over.** Tell the user to run `node scripts/setup-github.mjs output/<name>.plan <owner>/<repo>` once (they can run it with `--dry-run` first). It creates the labels, the milestones and the issues, each with exactly one `type:*` label and never a `risk:*` label (the QA task puts `risk:*` on pull requests), and links each task or spike to its feature as a sub-issue. Never run it without `--dry-run` and do not create issues with the GitHub connector. Never edit `scripts/setup-github.mjs` for a project.
 
 The kit writes the docs and the initial plan. After that, the new project codes the issues. It creates a new issue, or changes requirements, docs or ADRs, only when the user explicitly asks for it, and docs changes always go through a pull request. Its autonomous tasks (coder and QA) never create issues or change docs.

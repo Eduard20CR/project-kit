@@ -1,8 +1,8 @@
 {
-  "name": "project-kit",
+  "name": "project-kit-scripts",
   "private": true,
   "type": "module",
-  "description": "Kit tooling. Only scripts/setup-github.mjs uses these dependencies.",
+  "description": "The kit's scripts: new-project.mjs and setup-github.mjs.",
   "engines": {
     "node": ">=22"
   },
