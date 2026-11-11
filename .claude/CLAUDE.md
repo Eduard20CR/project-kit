@@ -1,6 +1,6 @@
 # CLAUDE.md — Project Kit
 
-This repo does all the work of a new project before any code is written: the interview, the docs, the zip and the plan on GitHub (labels, milestones and issues). The new project only codes the issues.
+This repo does all the work of a new project before any code is written: the interview, the docs, the zip and the plan on GitHub (labels, milestones and issues). After that, the new project codes the issues, and creates a new issue or changes a doc only when Oscar explicitly asks for it.
 `docs/documents.md` lists what the kit produces for each new project.
 
 ## Language
@@ -19,7 +19,7 @@ This repo does all the work of a new project before any code is written: the int
    2. When Oscar approves, fill in `output/<name>.setup-github.sh`: the `MILESTONES` list and one `create_issue` call per story and task, linking each task to its story with `link_sub_issue`. Write each issue body in `output/<name>.issues/` with the headings of the matching form in `templates/issue-templates/`. Give each issue a `type:*` label. Do not put `risk:*` labels on issues: the QA task puts them on pull requests.
    3. Oscar runs `output/<name>.setup-github.sh <owner>/<repo>` once. It creates the labels, the milestones and the issues. Do not create issues with the GitHub connector.
 
-The new project never writes its own requirements, docs or issues: the kit does all of that. The new project only codes the issues.
+The kit writes the docs and the initial plan. After that, the new project codes the issues. It creates a new issue, or changes requirements, docs or ADRs, only when Oscar explicitly asks for it, and docs changes always go through a pull request. Its autonomous tasks (coder and QA) never create issues or change docs.
 All files of a new project go in `output/<name>/`, never anywhere else in this repo. `output/` is in `.gitignore`.
 Follow `docs/documents.md` and `docs/project-structure.md`. All docs are in English.
 A kit template in `templates/` wins over a skill's own format (for example, `domain-modeling`'s ADR format).
