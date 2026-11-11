@@ -1,5 +1,5 @@
 name: Feature
-description: Something the user can do or notice.
+description: A user story. Its technical work is split into task sub-issues; the story closes when all of them are closed.
 labels: ["type:feature"]
 body:
   - type: textarea

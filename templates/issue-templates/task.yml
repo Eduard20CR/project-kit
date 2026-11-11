@@ -1,5 +1,5 @@
 name: Technical task
-description: Enabling work with no direct user value (infrastructure, CI/CD, refactoring, ADR).
+description: One piece of technical work, usually a sub-issue of a user story. One task = one pull request.
 labels: ["type:task"]
 body:
   - type: textarea
@@ -21,6 +21,11 @@ body:
     attributes:
       label: References
       description: Requirement and ADR IDs (e.g. NFR-COST-01, ADR-0005).
+  - type: input
+    id: story
+    attributes:
+      label: Story
+      description: The feature issue this task belongs to (e.g. #12). Also link it as a sub-issue. Leave empty for standalone work (CI, refactoring).
   - type: textarea
     id: files
     attributes:
