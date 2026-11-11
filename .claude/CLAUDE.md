@@ -1,6 +1,6 @@
 # CLAUDE.md — Project Kit
 
-This repo does all the work of a new project before any code is written: the interview, the docs, the zip and the plan on GitHub (labels, milestones and issues). After that, the new project codes the issues, and creates a new issue or changes a doc only when the user explicitly asks for it.
+This repo does all the work of a new project before any code is written: the interview, the docs, the project folder and the plan on GitHub (labels, milestones and issues). After that, the new project codes the issues, and creates a new issue or changes a doc only when the user explicitly asks for it.
 `docs/documents.md` lists what the kit produces for each new project.
 
 ## Language
@@ -13,7 +13,7 @@ This repo does all the work of a new project before any code is written: the int
 2. Run `/grill-with-docs` to interview the user about the project. It uses the `grilling` and `domain-modeling` skills.
 3. Fill in the files in `output/<name>/` from the interview, with the `doc-coauthoring` skill. Remove the template placeholders.
 4. Use the `skill-creator` skill if the new project needs its own skills.
-5. Run `scripts/zip-project.sh <name>` and give the user `output/<name>.zip`. They create the new GitHub repo, unzip it at its root and push it.
+5. Tell the user that `output/<name>/` is ready. They create the new GitHub repo, copy the contents of `output/<name>/` to its root and push it.
 6. Plan the work for the new GitHub repo, from this repo. You never create anything on GitHub: at the end, the user runs a script that does it.
    1. **Propose the plan in the chat.** It has:
       - Milestones. Each one is a vertical slice with a one-line "done" and no due date. M0 is the foundation: repo, CI and a smoke test. M1 is the thinnest slice that works end to end, checked with `docs/test-cases.md`.

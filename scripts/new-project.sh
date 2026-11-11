@@ -54,7 +54,7 @@ copy_template adr.md                         docs/adr/0000-template.md
 copy_template milestone-log.md               docs/milestones/template.md
 
 # Script that creates the labels, milestones and issues in the new repo. It stays in the kit
-# (outside the zip); Claude fills it in from the plan the user approves.
+# (outside output/<name>/); Claude fills it in from the plan the user approves.
 cp "$kit_root/templates/setup-github.sh" "$kit_root/output/$name.setup-github.sh"
 chmod +x "$kit_root/output/$name.setup-github.sh"
 mkdir -p "$kit_root/output/$name.issues"
