@@ -12,7 +12,7 @@ Skills in `.claude/skills/`:
 
 Templates in `templates/`: one per document, so every project's docs look the same.
 
-`scripts/setup_github.py`: a fixed, tested script that reads a project's plan (JSON) and creates it on GitHub. Its tests run with `python3 -m unittest discover -s tests`.
+`scripts/setup-github.mjs`: a fixed script (Node.js, no dependencies) that reads a project's plan (JSON) and creates it on GitHub.
 
 ## How to use it
 
@@ -21,7 +21,7 @@ Templates in `templates/`: one per document, so every project's docs look the sa
 3. Run `/grill-with-docs` and describe the project. Claude fills in the docs from the interview.
 4. Claude runs `scripts/zip-project.sh <name>` and gives you `output/<name>.zip`.
 5. Create the new GitHub repo, unzip it at its root and push it.
-6. Back in this repo, Claude proposes the milestones, stories and tasks. Once you approve them, Claude writes them as JSON files in `output/<name>.plan/`. You run `python3 scripts/setup_github.py output/<name>.plan <owner>/<repo>` once (add `--dry-run` first to see what it will create): it checks the plan and creates the labels, milestones and issues in the new repo. It needs the GitHub CLI (`gh`) logged in.
+6. Back in this repo, Claude proposes the milestones, stories and tasks. Once you approve them, Claude writes them as JSON files in `output/<name>.plan/`. You run `node scripts/setup-github.mjs output/<name>.plan <owner>/<repo>` once (add `--dry-run` first to see what it will create): it checks the plan and creates the labels, milestones and issues in the new repo. It needs Node.js and the GitHub CLI (`gh`) logged in.
 7. Create a scheduled task on claude.ai for the new repo and paste the prompt from [templates/coder-task.md](templates/coder-task.md). Run it with **Run now**: it codes up to 5 issues, one pull request each.
 8. Create a second scheduled task with the settings and prompt from [templates/qa-task.md](templates/qa-task.md). It runs on its own when a pull request opens: it labels it `risk:low`, `risk:medium` or `risk:high` and comments a summary in Spanish and the details in English. It never merges.
 

@@ -54,8 +54,8 @@ copy_template adr.md                         docs/adr/0000-template.md
 copy_template milestone-log.md               docs/milestones/template.md
 
 # The plan for the new repo (milestones and issues), as data only. It stays in the kit
-# (outside the zip). Claude replaces the example files with the plan the user approves,
-# and scripts/setup_github.py creates it on GitHub.
+# (outside output/<name>/). Claude replaces the example files with the plan the user approves,
+# and scripts/setup-github.mjs creates it on GitHub.
 cp -R "$kit_root/templates/plan" "$kit_root/output/$name.plan"
 
 # GitHub issue forms, so every issue has the same fields.

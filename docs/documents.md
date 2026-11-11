@@ -16,7 +16,7 @@ Write each one from its template in `templates/` when one exists.
 | `docs/milestones/` | Everyone | One closing log per closed milestone: app state, "done" check, docs fixed, retro, rules added to CLAUDE.md. Claude writes it when the user asks to close a milestone |
 | `CLAUDE.md` and skills | Claude | Rules and skills for working on the project |
 
-## Outside the zip
+## The plan (outside the project folder)
 
 The plan for the new repo stays in the kit, in `output/<name>.plan/`. It is data only:
 
@@ -25,4 +25,4 @@ The plan for the new repo stays in the kit, in `output/<name>.plan/`. It is data
 | `milestones.json` | The milestones: `id`, `title` and `done` (one line) |
 | `issues/<nn>-<type>.json` | One issue: `id`, `type` (`feature`, `task` or `spike`), `milestone`, `title`, the fields of its form in `templates/issue-templates/`, and for a task or spike, `feature` |
 
-`templates/plan/` is the example. `scripts/setup_github.py` checks the plan and creates the labels, milestones and issues; it builds each issue body from the form headings.
+`templates/plan/` is the example. `scripts/setup-github.mjs` checks the plan and creates the labels, milestones and issues; it builds each issue body from the form headings.
