@@ -1,0 +1,16 @@
+{
+  "name": "project-kit-scripts",
+  "private": true,
+  "type": "module",
+  "description": "The kit's scripts: new-project.mjs and setup-github.mjs.",
+  "scripts": {
+    "new-project": "node new-project.mjs",
+    "setup-github": "node setup-github.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}
