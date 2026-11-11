@@ -1,0 +1,36 @@
+name: Bug
+description: Something that does not work as the docs say.
+labels: ["type:bug"]
+body:
+  - type: textarea
+    id: what-happens
+    attributes:
+      label: What happens
+      description: Steps to reproduce and what you see.
+      value: "1. "
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+      description: What should happen, with the requirement it breaks (e.g. FR-03).
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      value: "- [ ] The steps above give the expected result.\n- [ ] A test covers this case."
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Files
+      description: Files where the bug probably is, if known.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Logs, screenshots, environment.

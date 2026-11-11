@@ -5,6 +5,7 @@ New projects use this folder structure. Folders marked "only if it applies" are 
 ```
 .claude/CLAUDE.md           rules for Claude
 .github/workflows/          CI and deploy
+.github/ISSUE_TEMPLATE/     issue forms: feature, task, bug, spike
 README.md                   what the app is, for non-technical readers
 apps/
   <app>/                    one folder per app the project needs, e.g. web/, api/, worker/

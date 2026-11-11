@@ -51,6 +51,10 @@ copy_template non-functional-requirements.md docs/requirements/non-functional.md
 copy_template test-cases.md                  docs/test-cases.md
 copy_template adr.md                         docs/adr/0000-template.md
 
+# GitHub issue forms, so every issue has the same fields.
+mkdir -p "$target/.github/ISSUE_TEMPLATE"
+cp "$kit_root"/templates/issue-templates/*.yml "$target/.github/ISSUE_TEMPLATE/"
+
 # The skills travel with the project, with the lock file so they can be updated
 # later with `npx skills update`.
 cp -R "$kit_root/.claude/skills" "$target/.claude/skills"
