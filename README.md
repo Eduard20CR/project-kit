@@ -1,6 +1,6 @@
 # Project Kit
 
-Project Kit is a toolbox for writing the documentation of a new project before any code is written.
+Project Kit does all the work of a new project before any code is written: the interview, the docs, the zip and the plan on GitHub (labels, milestones and issues). The new project only codes the issues.
 
 ## What it includes
 

@@ -21,7 +21,7 @@ MILESTONES=(
   "M1 {Thinnest end-to-end slice}|{What the user can do; validated with docs/test-cases.md.}"
 )
 
-# Labels: "name|color|description".
+# Labels: "name|color|description". The risk:* labels are for pull requests (the QA task sets them), not issues.
 LABELS=(
   "type:feature|1D76DB|User story"
   "type:task|5319E7|Technical task, one pull request"
@@ -86,9 +86,12 @@ link_sub_issue() {
   local story="$1" task="$2"
   local task_id
   task_id="$(gh api "repos/$repo/issues/$task" --jq .id)"
-  # GitHub answers 422 if the task is already a sub-issue; that is fine on a re-run.
-  gh api "repos/$repo/issues/$story/sub_issues" -F sub_issue_id="$task_id" > /dev/null 2>&1 \
-    || echo "Sub-issue link skipped (probably exists): #$task in #$story" >&2
+  if gh api "repos/$repo/issues/$story/sub_issues?per_page=100" --jq '.[].number' | grep -qx "$task"; then
+    echo "Sub-issue already linked: #$task in #$story" >&2
+  else
+    gh api "repos/$repo/issues/$story/sub_issues" -F sub_issue_id="$task_id" > /dev/null
+    echo "Linked sub-issue: #$task in #$story" >&2
+  fi
 }
 
 echo "Repository: $repo"
@@ -97,6 +100,6 @@ create_milestones
 
 # Issues: create each story, then its tasks, and link each task to its story.
 # Example (Claude replaces it with the approved plan):
-story="$(create_issue "{Story title}" "M1 {Thinnest end-to-end slice}" "type:feature,risk:low" "01-story.md")"
-task="$(create_issue "{Task title}" "M1 {Thinnest end-to-end slice}" "type:task,risk:low" "01-01-task.md")"
+story="$(create_issue "{Story title}" "M1 {Thinnest end-to-end slice}" "type:feature" "01-story.md")"
+task="$(create_issue "{Task title}" "M1 {Thinnest end-to-end slice}" "type:task" "01-01-task.md")"
 link_sub_issue "$story" "$task"
