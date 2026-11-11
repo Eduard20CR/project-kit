@@ -12,6 +12,5 @@ Write each one from its template in `templates/` when one exists.
 | `docs/requirements/functional.md` | Everyone | What the app does, with acceptance criteria |
 | `docs/requirements/non-functional.md` | Technical | Numbers for security, cost, performance, etc. |
 | `docs/test-cases.md` | Everyone | Real examples with the expected result |
-| `docs/screens.md` | Everyone | Only the important screens |
 | `docs/spikes/` | Technical | Investigations done before a decision |
 | `CLAUDE.md` and skills | Claude | Rules and skills for working on the project |
