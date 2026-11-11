@@ -43,3 +43,17 @@ C4Container
 | {Frontend} | {Tech and version} | [NNNN](adr/NNNN-slug.md) |
 
 The API contract lives in code (for example OpenAPI); link it here instead of copying it.
+
+## Repository
+
+{The project's actual folder tree, following the kit's project structure. One line per folder saying what it holds.}
+
+```
+apps/
+  {app}/            {What this app is}
+infra/
+  bootstrap/        {Resources created once}
+  modules/          {Reusable Terraform modules}
+  environments/     {One folder per environment}
+docs/               {Requirements, architecture, data model and ADRs}
+```
