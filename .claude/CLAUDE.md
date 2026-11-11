@@ -14,10 +14,19 @@ This repo does all the work of a new project before any code is written: the int
 3. Fill in the files in `output/<name>/` from the interview, with the `doc-coauthoring` skill. Remove the template placeholders.
 4. Use the `skill-creator` skill if the new project needs its own skills.
 5. Run `scripts/zip-project.sh <name>` and give the user `output/<name>.zip`. They create the new GitHub repo, unzip it at its root and push it.
-6. Plan the work, from this repo, on the new GitHub repo:
-   1. Propose the plan to the user: milestones as vertical slices with no due dates, each with its "done", and the stories and tasks of each one. M0 is the foundation (repo, CI, smoke test); M1 is the thinnest slice that works end to end, checked with `docs/test-cases.md`. Create nothing on GitHub yet.
-   2. When the user approves, fill in `output/<name>.setup-github.sh`: the `MILESTONES` list and one `create_issue` call per story and task, linking each task to its story with `link_sub_issue`. Write each issue body in `output/<name>.issues/` with the headings of the matching form in `templates/issue-templates/`. Give each issue a `type:*` label. Do not put `risk:*` labels on issues: the QA task puts them on pull requests.
-   3. The user runs `output/<name>.setup-github.sh <owner>/<repo>` once. It creates the labels, the milestones and the issues. Do not create issues with the GitHub connector.
+6. Plan the work for the new GitHub repo, from this repo. You never create anything on GitHub: at the end, the user runs a script that does it.
+   1. **Propose the plan in the chat.** It has:
+      - Milestones. Each one is a vertical slice with a one-line "done" and no due date. M0 is the foundation: repo, CI and a smoke test. M1 is the thinnest slice that works end to end, checked with `docs/test-cases.md`.
+      - The issues of each milestone. Each issue has one type: `feature` (a user story), `task` (technical work, one pull request) or `spike` (a time-boxed investigation).
+      - The feature each task or spike belongs to. A task or spike may stand alone (for example, the M0 tasks).
+   2. **Wait for the user's OK.** Change the plan until they approve it. Write no files before that.
+   3. **Write one body file per issue** in `output/<name>.issues/` (for example `01-feature.md`, `01-01-task.md`). Use the headings of the matching form in `templates/issue-templates/`: `feature.yml`, `task.yml` or `spike.yml`.
+   4. **Fill in `output/<name>.setup-github.sh`:**
+      - Replace the example `MILESTONES` entries with the approved milestones, as `"title|done"`.
+      - Replace the example at the end with one `create_issue "<title>" "<milestone title>" "type:<type>" "<body file>"` call per issue. The milestone title must match a `MILESTONES` entry exactly. Issue titles have no double quotes.
+      - Create each feature before its tasks and spikes, then link each one to it with `link_sub_issue "$feature" "$task"`.
+      - Each issue gets exactly one `type:*` label and never a `risk:*` label (the QA task puts `risk:*` on pull requests).
+   5. **Hand it over.** Tell the user to run `output/<name>.setup-github.sh <owner>/<repo>` once. It creates the labels, the milestones and the issues. Do not run the script and do not create issues with the GitHub connector.
 
 The kit writes the docs and the initial plan. After that, the new project codes the issues. It creates a new issue, or changes requirements, docs or ADRs, only when the user explicitly asks for it, and docs changes always go through a pull request. Its autonomous tasks (coder and QA) never create issues or change docs.
 All files of a new project go in `output/<name>/`, never anywhere else in this repo. `output/` is in `.gitignore`.
