@@ -7,8 +7,7 @@ New projects use this folder structure. Folders marked "only if it applies" are 
 .github/workflows/          CI and deploy
 README.md
 apps/
-  web/                      frontend (src/, tests/)
-  api/                      backend (src/, tests/)
+  <app>/                    one folder per app the project needs, e.g. web/, api/, worker/
 shared/                     types and constants shared by the apps (only if it applies)
 db/                         database migrations, e.g. Liquibase (only if it applies)
 infra/
@@ -21,6 +20,8 @@ docs/
   architecture.md           components, flows and repo structure
   data-model.md             data model
   c4.md                     C4 diagrams in Mermaid
+  test-cases.md             real examples with the expected result
+  screens.md                only the important screens
   requirements/
     functional.md           FR-XX with acceptance criteria
     non-functional.md       NFR-<AREA>-XX
