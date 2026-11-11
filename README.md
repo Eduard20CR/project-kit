@@ -14,7 +14,6 @@ Skills in `.claude/skills/`:
 
 - `grill-with-docs`: interviews you about the project. It uses `grilling` and `domain-modeling`, which also write the glossary and ADRs.
 - `doc-coauthoring`: writes the docs with you, section by section.
-- `skill-creator`: creates the skills the new project needs.
 
 Templates in `templates/`: one per document, so every project's docs look the same.
 
