@@ -1,6 +1,12 @@
 # Project Kit
 
-Project Kit does all the work of a new project before any code is written: the interview, the docs, the project folder and the plan on GitHub (labels, milestones and issues). After that, the new project codes the issues, and creates a new issue or changes a doc only when the user explicitly asks for it.
+Project Kit gets a new project ready before any code is written:
+
+1. It interviews you about the project.
+2. It writes the docs and creates the project folder.
+3. It plans the work on GitHub: labels, milestones and issues.
+
+After that, the new project just codes the issues. It adds an issue or changes a doc only when you ask for it.
 
 ## What it includes
 
@@ -8,7 +14,6 @@ Skills in `.claude/skills/`:
 
 - `grill-with-docs`: interviews you about the project. It uses `grilling` and `domain-modeling`, which also write the glossary and ADRs.
 - `doc-coauthoring`: writes the docs with you, section by section.
-- `skill-creator`: creates the skills the new project needs.
 
 Templates in `templates/`: one per document, so every project's docs look the same.
 
