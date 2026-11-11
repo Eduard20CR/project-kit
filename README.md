@@ -1,4 +1,4 @@
-# Scope
+# Project Kit
 
 Project Kit is a toolbox for writing the documentation of new projects before any code is written.
 
