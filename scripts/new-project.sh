@@ -53,11 +53,10 @@ copy_template test-cases.md                  docs/test-cases.md
 copy_template adr.md                         docs/adr/0000-template.md
 copy_template milestone-log.md               docs/milestones/template.md
 
-# Script that creates the labels, milestones and issues in the new repo. It stays in the kit
-# (outside output/<name>/); Claude fills it in from the plan the user approves.
-cp "$kit_root/templates/setup-github.sh" "$kit_root/output/$name.setup-github.sh"
-chmod +x "$kit_root/output/$name.setup-github.sh"
-mkdir -p "$kit_root/output/$name.issues"
+# The plan for the new repo (milestones and issues), as data only. It stays in the kit
+# (outside output/<name>/). Claude replaces the example files with the plan the user approves,
+# and scripts/setup-github.mjs creates it on GitHub.
+cp -R "$kit_root/templates/plan" "$kit_root/output/$name.plan"
 
 # GitHub issue forms, so every issue has the same fields.
 mkdir -p "$target/.github/ISSUE_TEMPLATE"
