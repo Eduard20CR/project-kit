@@ -22,6 +22,5 @@ Templates in `templates/`: one per document, so every project's docs look the sa
 6. Back in this repo, Claude proposes the milestones, stories and tasks and writes them into `output/<name>.setup-github.sh`. You approve and run it once with `<owner>/<repo>`: it creates the labels, milestones and issues in the new repo.
 7. Create a scheduled task on claude.ai for the new repo and paste the prompt from [templates/coder-task.md](templates/coder-task.md). Run it with **Run now**: it codes up to 5 issues, one pull request each.
 8. Create a second scheduled task with the settings and prompt from [templates/qa-task.md](templates/qa-task.md). It runs on its own when a pull request opens: it labels it `risk:low`, `risk:medium` or `risk:high` and comments a summary in Spanish and the details in English. It never merges.
-9. When a milestone ends, follow [templates/milestone-close.md](templates/milestone-close.md): you write 3 short notes and Claude turns them into `docs/milestones/<Mx>-<slug>.md` in one small pull request.
 
 Claude follows [docs/documents.md](docs/documents.md), [docs/project-structure.md](docs/project-structure.md) and the templates in `templates/`.
