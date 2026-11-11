@@ -43,7 +43,7 @@ db/                         database migrations, e.g. Liquibase (only if it appl
 infra/
   bootstrap/                resources created once (state, OIDC)
   modules/                  reusable Terraform modules
-  main/                     the app's infrastructure
+  environments/             one folder per environment (e.g. dev/, prod/)
 scripts/
 docs/
   README.md                 scope by version and conventions
