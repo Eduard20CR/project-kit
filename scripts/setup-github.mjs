@@ -10,9 +10,10 @@
 //         ├── 01-feature.json  one file per issue
 //         └── 01-01-task.json
 //
-// Usage (run `npm install` once in the kit first):
-//     node scripts/setup-github.mjs output/<name>.plan <owner>/<repo> --dry-run
-//     node scripts/setup-github.mjs output/<name>.plan <owner>/<repo>
+// Usage, from scripts/ (run `npm install` there once first):
+//     npm run setup-github -- <name> <owner>/<repo> --dry-run
+//     npm run setup-github -- <name> <owner>/<repo>
+// It reads the plan in output/<name>.plan/.
 //
 // What it does:
 // 1. Checks the whole plan. If anything is wrong, it prints every problem and creates nothing.
@@ -370,12 +371,14 @@ function printDryRun(repo, milestones, issues) {
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
-const [planDir, repo, ...rest] = args.filter((arg) => arg !== "--dry-run");
+const [name, repo, ...rest] = args.filter((arg) => arg !== "--dry-run");
 
-if (!planDir || !repo || rest.length || !/^[\w.-]+\/[\w.-]+$/.test(repo)) {
-  console.error("Usage: node scripts/setup-github.mjs <plan folder> <owner>/<repo> [--dry-run]");
+if (!name || !repo || rest.length || !/^[\w.-]+\/[\w.-]+$/.test(repo)) {
+  console.error("Usage: npm run setup-github -- <name> <owner>/<repo> [--dry-run]");
   process.exit(1);
 }
+
+const planDir = join(import.meta.dirname, "..", "output", `${name}.plan`);
 
 const { milestones, issues } = loadPlan(planDir);
 if (dryRun) {

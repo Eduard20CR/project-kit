@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 // Creates output/<name>/ with the folder structure, the templates in place and the skills,
 // and output/<name>.plan/ with an example plan.
-// Usage: node scripts/new-project.mjs <project-name>
+// Usage, from scripts/: npm run new-project -- <name>
 
 import { cpSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 const [name, ...rest] = process.argv.slice(2);
 if (!name || rest.length) {
-  console.error("Usage: node scripts/new-project.mjs <project-name>");
+  console.error("Usage: npm run new-project -- <name>");
   process.exit(1);
 }
 
