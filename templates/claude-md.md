@@ -17,7 +17,7 @@
 - One branch and one pull request per task. Never push to `main`, never merge.
 - Write the pull request body with `.github/pull_request_template.md`: the Overview in Spanish, the rest in English.
 - Run lint, typecheck and tests before pushing.
-- Do not write docs, requirements, ADRs or issues. If a task needs a decision the docs do not cover, or the docs look wrong, do not decide: comment on the issue, add the `blocked` label and stop.
+- Do not write docs, requirements, ADRs or issues. If a task needs a decision the docs do not cover, or the docs look wrong, do not decide: comment on the issue, add the `blocked` label and stop. The only exception is the milestone closing log in `docs/milestones/`, written only when asked to close a milestone.
 
 ## Golden rules
 
