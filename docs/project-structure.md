@@ -4,7 +4,6 @@ New projects use this folder structure. Folders marked "only if it applies" are 
 
 ```
 .claude/CLAUDE.md           rules for Claude
-.claude/coder-task.md       record of the coder task prompt pasted on claude.ai
 .github/workflows/          CI and deploy
 .github/ISSUE_TEMPLATE/     issue forms: feature, task, bug, spike
 .github/pull_request_template.md  pull request body: Spanish overview, English detail

@@ -20,6 +20,6 @@ Templates in `templates/`: one per document, so every project's docs look the sa
 4. Claude runs `scripts/zip-project.sh <name>` and gives you `output/<name>.zip`.
 5. Create the new GitHub repo, unzip it at its root and push it.
 6. Back in this repo, Claude proposes the milestones, stories and tasks and writes them into `output/<name>.setup-github.sh`. You approve and run it once with `<owner>/<repo>`: it creates the labels, milestones and issues in the new repo.
-7. Create a scheduled task on claude.ai for the new repo and paste the prompt from `.claude/coder-task.md` in the new repo (copied from [templates/coder-task.md](templates/coder-task.md)). Run it with **Run now**: it codes up to 5 issues, one pull request each.
+7. Create a scheduled task on claude.ai for the new repo and paste the prompt from [templates/coder-task.md](templates/coder-task.md). Run it with **Run now**: it codes up to 5 issues, one pull request each.
 
 Claude follows [docs/documents.md](docs/documents.md), [docs/project-structure.md](docs/project-structure.md) and the templates in `templates/`.
