@@ -37,8 +37,7 @@ README.md
 apps/
   web/                      frontend (src/, tests/)
   api/                      backend (src/, tests/)
-packages/
-  shared/                   types and constants shared by the apps (only if it applies)
+shared/                     types and constants shared by the apps (only if it applies)
 db/                         database migrations, e.g. Liquibase (only if it applies)
 infra/
   bootstrap/                resources created once (state, OIDC)
