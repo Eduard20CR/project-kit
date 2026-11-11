@@ -29,7 +29,7 @@ Scripts in `scripts/`, a small Node.js project (run `npm install` there once):
 2. Start a Claude Code session in this repo and run `/grill-with-docs`. Describe the project and answer Claude's questions.
 3. Claude fills in the docs in `output/<name>/` from the interview.
 4. You and Claude review all the docs together, until everything is clear.
-5. Create the new GitHub repo, copy the contents of `output/<name>/` to its root and push it.
+5. Create a new, empty GitHub repo (no README, `.gitignore` or license). Clone it, copy everything inside `output/<name>/` to its root (including hidden folders like `.claude/` and `.github/`), commit and push to `main`. Then tell Claude the repo as `<owner>/<repo>`.
 6. Claude proposes the milestones, stories and tasks. Once you approve them, Claude writes them as JSON files in `output/<name>.plan/`.
 7. In `scripts/`, you run `npm run setup-github -- <name> <owner>/<repo>` once (add `--dry-run` first to see what it will create): it checks the plan and creates the labels, milestones and issues in the new repo. It needs the GitHub CLI (`gh`) logged in.
 8. Create a scheduled task on claude.ai for the new repo and paste the prompt from [templates/coder-task.md](templates/coder-task.md). Run it with **Run now**: it codes up to 5 issues, one pull request each.
