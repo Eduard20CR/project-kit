@@ -11,7 +11,6 @@ Write each one from its template in `templates/` when one exists.
 | `docs/adr/` | Technical | Why each important decision was made, one per file |
 | `docs/requirements/functional.md` | Everyone | What the app does, with acceptance criteria |
 | `docs/requirements/non-functional.md` | Technical | Numbers for security, cost, performance, etc. |
-| `docs/test-cases.md` | Everyone | Real examples with the expected result |
 | `docs/spikes/` | Technical | Investigations done before a decision |
 | `docs/milestones/` | Everyone | One closing log per closed milestone: app state, "done" check, docs fixed, retro, rules added to CLAUDE.md. Claude writes it when the user asks to close a milestone |
 | `CLAUDE.md` and skills | Claude | Rules and skills for working on the project |

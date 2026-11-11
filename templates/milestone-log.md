@@ -10,7 +10,7 @@ Closed: {YYYY-MM-DD}
 
 The milestone's "done", item by item, with how it was checked.
 
-- [x] {Item of the "done"} — {how it was checked: test case TC-XX, manual test, CI run, etc.}
+- [x] {Item of the "done"} — {how it was checked: manual test, CI run, etc.}
 - [ ] {Item not met} — {why, and the issue that carries it}
 
 ## Docs fixed

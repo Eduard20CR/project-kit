@@ -1,4 +1,4 @@
 [
   { "id": "M0", "title": "M0 Foundation", "done": "{Repo, CI and a smoke test work.}" },
-  { "id": "M1", "title": "M1 {Thinnest end-to-end slice}", "done": "{What the user can do; checked with docs/test-cases.md.}" }
+  { "id": "M1", "title": "M1 {Thinnest end-to-end slice}", "done": "{What the user can do, end to end.}" }
 ]
