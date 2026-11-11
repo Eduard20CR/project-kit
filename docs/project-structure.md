@@ -20,6 +20,8 @@ docs/
   architecture.md           components, flows and repo structure
   data-model.md             data model
   c4.md                     C4 diagrams in Mermaid
+  test-cases.md             real examples with the expected result
+  screens.md                only the important screens
   requirements/
     functional.md           FR-XX with acceptance criteria
     non-functional.md       NFR-<AREA>-XX
