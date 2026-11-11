@@ -16,8 +16,8 @@ This repo is a toolbox for writing the documentation of a new project before any
 5. Run `scripts/zip-project.sh <name>` and give Oscar `output/<name>.zip`. He creates the new GitHub repo, unzips it at its root and pushes it.
 6. Plan the work, from this repo, on the new GitHub repo:
    1. Propose the plan to Oscar: milestones as vertical slices with no due dates, each with its "done", and the stories and tasks of each one. M0 is the foundation (repo, CI, smoke test); M1 is the thinnest slice that works end to end, checked with `docs/test-cases.md`. Create nothing on GitHub yet.
-   2. When Oscar approves, fill in `MILESTONES` in `output/<name>.setup-github.sh`. Oscar runs it once with the new repo as argument; it creates the milestones and the labels.
-   3. Add the new repo to this session, then create the issues with the GitHub connector: each story as a feature issue and each task as a sub-issue of its story, all in their milestone, with a `type:*` and a `risk:*` label. Infra, auth, IAM, secrets, prompts and data deletion are always `risk:high`. Use the headings of the issue forms in `templates/issue-templates/`.
+   2. When Oscar approves, fill in `output/<name>.setup-github.sh`: the `MILESTONES` list and one `create_issue` call per story and task, linking each task to its story with `link_sub_issue`. Write each issue body in `output/<name>.issues/` with the headings of the matching form in `templates/issue-templates/`. Give each issue a `type:*` and a `risk:*` label; infra, auth, IAM, secrets, prompts and data deletion are always `risk:high`.
+   3. Oscar runs `output/<name>.setup-github.sh <owner>/<repo>` once. It creates the labels, the milestones and the issues. Do not create issues with the GitHub connector.
 
 The new project never writes its own requirements, docs or issues: the kit does all of that. The new project only codes the issues.
 All files of a new project go in `output/<name>/`, never anywhere else in this repo. `output/` is in `.gitignore`.

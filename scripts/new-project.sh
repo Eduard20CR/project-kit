@@ -51,10 +51,11 @@ copy_template non-functional-requirements.md docs/requirements/non-functional.md
 copy_template test-cases.md                  docs/test-cases.md
 copy_template adr.md                         docs/adr/0000-template.md
 
-# Script that creates the milestones and labels in the new repo. It stays in the kit
+# Script that creates the labels, milestones and issues in the new repo. It stays in the kit
 # (outside the zip); Claude fills it in from the plan Oscar approves.
 cp "$kit_root/templates/setup-github.sh" "$kit_root/output/$name.setup-github.sh"
 chmod +x "$kit_root/output/$name.setup-github.sh"
+mkdir -p "$kit_root/output/$name.issues"
 
 # GitHub issue forms, so every issue has the same fields.
 mkdir -p "$target/.github/ISSUE_TEMPLATE"

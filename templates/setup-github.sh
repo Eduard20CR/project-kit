@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# Creates the milestones and labels of a new project's GitHub repo. Oscar runs it once,
-# locally, from the kit, after he approves the plan. Claude fills in MILESTONES.
-# Needs the GitHub CLI (`gh`) logged in. Safe to re-run: existing labels are updated
-# and existing milestones are skipped.
+# Sets up a new project's GitHub repo: labels, milestones and issues.
+# Oscar runs it once, locally, from the kit, after he approves the plan.
+# Claude fills in MILESTONES and the "Issues" section from the approved plan, and writes
+# each issue body in output/<name>.issues/<file>.md using the issue form headings.
+# Needs the GitHub CLI (`gh`) logged in. Safe to re-run: labels are updated, and
+# milestones and issues that already exist (same title) are skipped.
 # Usage: output/<name>.setup-github.sh <owner>/<repo>
 set -euo pipefail
 
@@ -11,6 +13,7 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 repo="$1"
+issues_dir="${0%.setup-github.sh}.issues"
 
 # Milestones: "title|done". No due dates: a milestone closes when its "done" is met.
 MILESTONES=(
@@ -31,20 +34,69 @@ LABELS=(
   "manual-step|C5DEF5|Only Oscar can do this"
 )
 
-echo "Repository: $repo"
+create_labels() {
+  for label in "${LABELS[@]}"; do
+    IFS='|' read -r name color description <<< "$label"
+    gh label create "$name" --repo "$repo" --color "$color" --description "$description" --force
+  done
+}
 
-for label in "${LABELS[@]}"; do
-  IFS='|' read -r name color description <<< "$label"
-  gh label create "$name" --repo "$repo" --color "$color" --description "$description" --force
-done
+create_milestones() {
+  local existing
+  existing="$(gh api "repos/$repo/milestones?state=all&per_page=100" --jq '.[].title')"
+  for milestone in "${MILESTONES[@]}"; do
+    IFS='|' read -r title done <<< "$milestone"
+    if grep -qxF "$title" <<< "$existing"; then
+      echo "Milestone already exists: $title"
+    else
+      gh api "repos/$repo/milestones" -f title="$title" -f description="Done when: $done" > /dev/null
+      echo "Created milestone: $title"
+    fi
+  done
+}
 
-existing_milestones="$(gh api "repos/$repo/milestones?state=all&per_page=100" --jq '.[].title')"
-for milestone in "${MILESTONES[@]}"; do
-  IFS='|' read -r title done <<< "$milestone"
-  if grep -qxF "$title" <<< "$existing_milestones"; then
-    echo "Milestone already exists: $title"
+# Prints the number of the issue with this exact title, or nothing.
+# Titles must not contain double quotes (they would break the filter).
+find_issue() {
+  local title="$1"
+  gh issue list --repo "$repo" --state all --limit 1000 --json number,title \
+    --jq ".[] | select(.title == \"$title\") | .number" | head -n 1
+}
+
+# create_issue <title> <milestone> <labels> <body file>
+# Prints the issue number. Reuses the issue if one with the same title exists.
+create_issue() {
+  local title="$1" milestone="$2" labels="$3" body_file="$4"
+  local number
+  number="$(find_issue "$title")"
+  if [ -n "$number" ]; then
+    echo "Issue already exists: #$number $title" >&2
   else
-    gh api "repos/$repo/milestones" -f title="$title" -f description="Done when: $done" > /dev/null
-    echo "Created milestone: $title"
+    local url
+    url="$(gh issue create --repo "$repo" --title "$title" --milestone "$milestone" \
+      --label "$labels" --body-file "$issues_dir/$body_file")"
+    number="${url##*/}"
+    echo "Created issue: #$number $title" >&2
   fi
-done
+  echo "$number"
+}
+
+# link_sub_issue <story number> <task number>
+link_sub_issue() {
+  local story="$1" task="$2"
+  local task_id
+  task_id="$(gh api "repos/$repo/issues/$task" --jq .id)"
+  # GitHub answers 422 if the task is already a sub-issue; that is fine on a re-run.
+  gh api "repos/$repo/issues/$story/sub_issues" -F sub_issue_id="$task_id" > /dev/null 2>&1 \
+    || echo "Sub-issue link skipped (probably exists): #$task in #$story" >&2
+}
+
+echo "Repository: $repo"
+create_labels
+create_milestones
+
+# Issues: create each story, then its tasks, and link each task to its story.
+# Example (Claude replaces it with the approved plan):
+story="$(create_issue "{Story title}" "M1 {Thinnest end-to-end slice}" "type:feature,risk:low" "01-story.md")"
+task="$(create_issue "{Task title}" "M1 {Thinnest end-to-end slice}" "type:task,risk:low" "01-01-task.md")"
+link_sub_issue "$story" "$task"
