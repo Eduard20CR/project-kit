@@ -2,9 +2,10 @@
   "name": "project-kit-scripts",
   "private": true,
   "type": "module",
-  "description": "The kit's scripts: new-project.mjs and setup-github.mjs.",
+  "description": "The kit's scripts: new-project.mjs, check-placeholders.mjs and setup-github.mjs.",
   "scripts": {
     "new-project": "node new-project.mjs",
+    "check-placeholders": "node check-placeholders.mjs",
     "setup-github": "node setup-github.mjs"
   },
   "engines": {

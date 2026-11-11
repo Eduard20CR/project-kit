@@ -25,4 +25,7 @@
 - [Data model](docs/data-model.md)
 - [Functional requirements](docs/requirements/functional.md)
 - [Non-functional requirements](docs/requirements/non-functional.md)
+- [Test cases](docs/test-cases.md)
 - [Decisions (ADR)](docs/adr/)
+- [Spikes](docs/spikes/)
+- [Milestone logs](docs/milestones/)
