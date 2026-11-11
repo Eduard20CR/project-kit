@@ -3,7 +3,7 @@
 # The user runs it once, locally, from the kit, after they approve the plan.
 # Claude fills in MILESTONES and the "Issues" section from the approved plan, and writes
 # each issue body in output/<name>.issues/<file>.md using the issue form headings.
-# Needs the GitHub CLI (`gh`) logged in. Safe to re-run: labels are updated, and
+# Needs the GitHub CLI (`gh`) logged in, and `jq`. Safe to re-run: labels are updated, and
 # milestones and issues that already exist (same title) are skipped.
 # Usage: output/<name>.setup-github.sh <owner>/<repo>
 set -euo pipefail
@@ -13,6 +13,12 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 repo="$1"
+for tool in gh jq; do
+  if ! command -v "$tool" > /dev/null; then
+    echo "Missing tool: $tool. Install it and run this script again." >&2
+    exit 1
+  fi
+done
 issues_dir="${0%.setup-github.sh}.issues"
 
 # Milestones: "title|done". No due dates: a milestone closes when its "done" is met.
@@ -56,11 +62,11 @@ create_milestones() {
 }
 
 # Prints the number of the issue with this exact title, or nothing.
-# Titles must not contain double quotes (they would break the filter).
+# The title goes to jq as a variable (--arg), so quotes and backticks in it are safe.
 find_issue() {
   local title="$1"
   gh issue list --repo "$repo" --state all --limit 1000 --json number,title \
-    --jq ".[] | select(.title == \"$title\") | .number" | head -n 1
+    | jq -r --arg title "$title" '.[] | select(.title == $title) | .number' | head -n 1
 }
 
 # create_issue <title> <milestone> <labels> <body file>
