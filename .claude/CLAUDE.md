@@ -1,7 +1,7 @@
 # CLAUDE.md — Project Kit
 
 This repo is a toolbox for writing the documentation of a new project before any code is written.
-`README.md` lists what the kit produces for each new project.
+`docs/documents.md` lists what the kit produces for each new project.
 
 ## Language
 
@@ -13,7 +13,7 @@ This repo is a toolbox for writing the documentation of a new project before any
 2. Use the `doc-coauthoring` skill to write the docs section by section from the interview.
 3. Use the `skill-creator` skill to create the skills the new project needs.
 
-The docs of a new project go in that project's own repo, never in this one.
+The docs of a new project go in that project's own repo, never in this one, following `docs/documents.md` and `docs/project-structure.md`. All docs are in English.
 If the kit has a template for a document, use it.
 
 ## How to work
