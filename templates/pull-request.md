@@ -1,6 +1,6 @@
 ## Overview
 
-<!-- In Spanish, 3 to 5 short lines. What changes for the app, in plain words. One-line analogy for any new concept. What Oscar should check before merging. -->
+<!-- In Spanish, 3 to 5 short lines. What changes for the app, in plain words. One-line analogy for any new concept. What the user should check before merging. -->
 
 Closes #
 

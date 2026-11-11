@@ -26,7 +26,7 @@ You are reviewing one pull request on the repository {owner}/{repo}. You review 
    ## QA: risk:<level>
 
    ### Resumen
-   In Spanish, plain words: what changes in 2 or 3 lines, why this risk, and what Oscar should check (files and lines).
+   In Spanish, plain words: what changes in 2 or 3 lines, why this risk, and what the user should check (files and lines).
 
    ### Details
    In English: every finding from `/code-review` and `/security-review`, with file and line, marked as bug or judgement call. Say "No findings" if there are none. Say what was not checked.

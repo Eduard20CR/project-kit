@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Sets up a new project's GitHub repo: labels, milestones and issues.
-# Oscar runs it once, locally, from the kit, after he approves the plan.
+# The user runs it once, locally, from the kit, after they approve the plan.
 # Claude fills in MILESTONES and the "Issues" section from the approved plan, and writes
 # each issue body in output/<name>.issues/<file>.md using the issue form headings.
 # Needs the GitHub CLI (`gh`) logged in. Safe to re-run: labels are updated, and
@@ -30,8 +30,8 @@ LABELS=(
   "risk:low|0E8A16|Quick review"
   "risk:medium|FBCA04|Review the marked lines"
   "risk:high|B60205|Infra, auth, IAM, secrets, prompts or data deletion: full review"
-  "blocked|000000|Waiting on an answer from Oscar"
-  "manual-step|C5DEF5|Only Oscar can do this"
+  "blocked|000000|Waiting on an answer from the user"
+  "manual-step|C5DEF5|Only the user can do this"
 )
 
 create_labels() {
