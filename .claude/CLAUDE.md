@@ -1,6 +1,13 @@
 # CLAUDE.md — Project Kit
 
-This repo does all the work of a new project before any code is written: the interview, the docs, the project folder and the plan on GitHub (labels, milestones and issues). After that, the new project codes the issues, and creates a new issue or changes a doc only when the user explicitly asks for it.
+This repo gets a new project ready before any code is written:
+
+1. Interview the user about the project.
+2. Write the docs and create the project folder.
+3. Plan the work on GitHub: labels, milestones and issues.
+
+After that, the new project just codes the issues. It adds an issue or changes a doc only when the user asks for it.
+
 `docs/documents.md` lists what the kit produces for each new project.
 
 ## Language
