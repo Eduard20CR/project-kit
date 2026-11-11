@@ -16,6 +16,7 @@
 - One branch and one pull request per issue. Never push to `main`, never merge.
 - Run lint, typecheck and tests before pushing.
 - If a decision changes, add a new ADR in the same pull request.
+- When you create an issue through the GitHub connector, the issue forms are not applied: write the body with the same headings as the matching form in `.github/ISSUE_TEMPLATE/`.
 
 ## Golden rules
 
