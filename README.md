@@ -14,8 +14,10 @@ Templates in `templates/`: one per document, so every project's docs look the sa
 
 ## How to use it
 
-1. Open this repo in Claude Code.
-2. Run `/grill-with-docs` and describe the new project.
-3. Ask Claude to write the docs with `doc-coauthoring`.
+1. Open this repo in Claude Code and tell Claude the name of the new project.
+2. Claude runs `scripts/new-project.sh <name>`, which creates `output/<name>/` with the folders, templates and skills.
+3. Run `/grill-with-docs` and describe the project. Claude fills in the docs from the interview.
+4. Claude runs `scripts/zip-project.sh <name>` and gives you `output/<name>.zip`.
+5. Unzip it at the root of the new repo.
 
 Claude follows [docs/documents.md](docs/documents.md), [docs/project-structure.md](docs/project-structure.md) and the templates in `templates/`.
