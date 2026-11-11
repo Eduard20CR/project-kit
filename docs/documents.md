@@ -23,6 +23,6 @@ The plan for the new repo stays in the kit, in `output/<name>.plan/`. It is data
 | File | What it contains |
 |---|---|
 | `milestones.json` | The milestones: `id`, `title` and `done` (one line) |
-| `issues/<nn>-<type>.json` | One issue: `id`, `type` (`feature`, `task` or `spike`), `milestone`, `title`, the fields of its form in `templates/issue-templates/`, and for a task or spike, `feature` |
+| `issues/<id>-<type>.json` (e.g. `01-feature.json`, `01-01-task.json`) | One issue: `id`, `type` (`feature`, `task` or `spike`), `milestone`, `title`, the fields of its form in `templates/issue-templates/`, and for a task or spike, `feature` |
 
 `templates/plan/` is the example. `scripts/setup-github.mjs` checks the plan and creates the labels, milestones and issues; it builds each issue body from the form headings.

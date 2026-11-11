@@ -15,6 +15,7 @@ Templates in `templates/`: one per document, so every project's docs look the sa
 Scripts in `scripts/`, a small Node.js project (run `npm install` there once):
 
 - `new-project.mjs`: creates the new project's folder with the templates and skills.
+- `check-placeholders.mjs`: lists the template placeholders (like `{Project name}`) still left in the new project's docs and plan, with file and line.
 - `setup-github.mjs`: a fixed script (with `zod` to check the data) that reads a project's plan (JSON) and creates it on GitHub.
 
 ## How to use it
