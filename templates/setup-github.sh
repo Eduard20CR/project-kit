@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
-# Creates the milestones and labels of this project on GitHub. Run it once, locally,
-# after Oscar approves the plan. Claude fills in MILESTONES from the approved plan.
+# Creates the milestones and labels of a new project's GitHub repo. Oscar runs it once,
+# locally, from the kit, after he approves the plan. Claude fills in MILESTONES.
 # Needs the GitHub CLI (`gh`) logged in. Safe to re-run: existing labels are updated
 # and existing milestones are skipped.
+# Usage: output/<name>.setup-github.sh <owner>/<repo>
 set -euo pipefail
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <owner>/<repo>" >&2
+  exit 1
+fi
+repo="$1"
 
 # Milestones: "title|done". No due dates: a milestone closes when its "done" is met.
 MILESTONES=(
@@ -24,12 +31,11 @@ LABELS=(
   "manual-step|C5DEF5|Only Oscar can do this"
 )
 
-repo="$(gh repo view --json nameWithOwner --jq .nameWithOwner)"
 echo "Repository: $repo"
 
 for label in "${LABELS[@]}"; do
   IFS='|' read -r name color description <<< "$label"
-  gh label create "$name" --color "$color" --description "$description" --force
+  gh label create "$name" --repo "$repo" --color "$color" --description "$description" --force
 done
 
 existing_milestones="$(gh api "repos/$repo/milestones?state=all&per_page=100" --jq '.[].title')"

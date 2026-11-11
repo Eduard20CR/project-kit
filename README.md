@@ -18,6 +18,7 @@ Templates in `templates/`: one per document, so every project's docs look the sa
 2. Claude runs `scripts/new-project.sh <name>`, which creates `output/<name>/` with the folders, templates and skills.
 3. Run `/grill-with-docs` and describe the project. Claude fills in the docs from the interview.
 4. Claude runs `scripts/zip-project.sh <name>` and gives you `output/<name>.zip`.
-5. Unzip it at the root of the new repo.
+5. Create the new GitHub repo, unzip it at its root and push it.
+6. Back in this repo, Claude proposes the milestones, stories and tasks. You approve, run `output/<name>.setup-github.sh <owner>/<repo>` once, and Claude creates the issues in the new repo.
 
 Claude follows [docs/documents.md](docs/documents.md), [docs/project-structure.md](docs/project-structure.md) and the templates in `templates/`.

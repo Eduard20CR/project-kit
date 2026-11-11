@@ -15,7 +15,7 @@ infra/
   bootstrap/                resources created once (state, OIDC)
   modules/                  reusable Terraform modules
   environments/             one folder per environment (e.g. dev/, prod/)
-scripts/                    helper scripts, including setup-github.sh (milestones and labels)
+scripts/                    helper scripts
 docs/
   architecture.md           components, C4 levels 1-2 in Mermaid, flows, repo tree
   data-model.md             Mermaid erDiagram
