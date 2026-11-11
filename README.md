@@ -29,4 +29,6 @@ Scripts in `scripts/`, a small Node.js project (run `npm install` there once):
 7. Create a scheduled task on claude.ai for the new repo and paste the prompt from [templates/coder-task.md](templates/coder-task.md). Run it with **Run now**: it codes up to 5 issues, one pull request each.
 8. Create a second scheduled task with the settings and prompt from [templates/qa-task.md](templates/qa-task.md). It runs on its own when a pull request opens: it labels it `risk:low`, `risk:medium` or `risk:high` and comments a summary in Spanish and the details in English. It never merges.
 
+[docs/start-checklist.md](docs/start-checklist.md) lists what must be done at each phase, so nothing is forgotten.
+
 Claude follows [docs/documents.md](docs/documents.md), [docs/project-structure.md](docs/project-structure.md) and the templates in `templates/`.

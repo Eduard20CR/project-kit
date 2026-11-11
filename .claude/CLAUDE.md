@@ -9,6 +9,8 @@ This repo does all the work of a new project before any code is written: the int
 
 ## How to document a new project
 
+Go through `docs/start-checklist.md` before moving to the next phase, and tell the user which items are still open.
+
 1. In `scripts/`, run `npm run new-project -- <name>` (run `npm install` there once first). It creates `output/<name>/` with the folder structure, the templates in place and the skills.
 2. Run `/grill-with-docs` to interview the user about the project. It uses the `grilling` and `domain-modeling` skills.
 3. Fill in the files in `output/<name>/` from the interview, with the `doc-coauthoring` skill. Remove the template placeholders: `npm run check-placeholders -- <name>`, in `scripts/`, lists the ones left with file and line.
