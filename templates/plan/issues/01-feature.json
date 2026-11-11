@@ -1,0 +1,12 @@
+{
+  "id": "01",
+  "type": "feature",
+  "milestone": "M1",
+  "title": "{Feature title}",
+  "story": "As a **{role}**, I want {capability}, so that {benefit}.",
+  "acceptance": ["**Given** {context}, **when** {action}, **then** {result}."],
+  "references": ["{FR-01}", "{ADR-0001}"],
+  "files": ["{apps/web/src/...}"],
+  "depends_on": ["00-01"],
+  "notes": "{Optional.}"
+}

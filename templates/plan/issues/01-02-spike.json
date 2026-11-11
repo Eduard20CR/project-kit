@@ -1,0 +1,13 @@
+{
+  "id": "01-02",
+  "type": "spike",
+  "milestone": "M1",
+  "feature": "01",
+  "title": "{Spike title}",
+  "question": "{What we need to find out, and which decision it unblocks.}",
+  "timebox": "{2 hours}",
+  "acceptance": [
+    "Findings written in docs/spikes/NNNN-slug.md.",
+    "Recommendation given; an ADR is proposed if the decision is hard to reverse."
+  ]
+}

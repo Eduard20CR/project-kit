@@ -20,13 +20,12 @@ This repo does all the work of a new project before any code is written: the int
       - The issues of each milestone. Each issue has one type: `feature` (a user story), `task` (technical work, one pull request) or `spike` (a time-boxed investigation).
       - The feature each task or spike belongs to. A task or spike may stand alone (for example, the M0 tasks).
    2. **Wait for the user's OK.** Change the plan until they approve it. Write no files before that.
-   3. **Write one body file per issue** in `output/<name>.issues/` (for example `01-feature.md`, `01-01-task.md`). Use the headings of the matching form in `templates/issue-templates/`: `feature.yml`, `task.yml` or `spike.yml`.
-   4. **Fill in `output/<name>.setup-github.sh`:**
-      - Replace the example `MILESTONES` entries with the approved milestones, as `"title|done"`.
-      - Replace the example at the end with one `create_issue "<title>" "<milestone title>" "type:<type>" "<body file>"` call per issue. The milestone title must match a `MILESTONES` entry exactly. Issue titles have no double quotes.
-      - Create each feature before its tasks and spikes, then link each one to it with `link_sub_issue "$feature" "$task"`.
-      - Each issue gets exactly one `type:*` label and never a `risk:*` label (the QA task puts `risk:*` on pull requests).
-   5. **Hand it over.** Tell the user to run `output/<name>.setup-github.sh <owner>/<repo>` once. It creates the labels, the milestones and the issues. Do not run the script and do not create issues with the GitHub connector.
+   3. **Write the plan as data** in `output/<name>.plan/`, which `scripts/new-project.sh` created with an example. Write no code and no Markdown files for the plan.
+      - `milestones.json`: the approved milestones, as `{"id", "title", "done"}`.
+      - `issues/`: one JSON file per issue (for example `01-feature.json`, `01-01-task.json`). Each one has `id`, `type` (`feature`, `task` or `spike`), `milestone` (a milestone id), `title`, and the fields of the matching form in `templates/issue-templates/`. `acceptance`, `references`, `files` and `depends_on` are lists. A task or spike that belongs to a feature has `feature` (the feature's id). `depends_on` lists ids from the plan.
+      - Replace the example files. Leave no `{placeholder}` behind.
+   4. **Check the plan** with `python3 scripts/setup_github.py output/<name>.plan <owner>/<repo> --dry-run`. It checks every file, prints what it would create and touches nothing on GitHub. Fix the plan until it passes.
+   5. **Hand it over.** Tell the user to run `python3 scripts/setup_github.py output/<name>.plan <owner>/<repo>` once (they can run it with `--dry-run` first). It creates the labels, the milestones and the issues, each with exactly one `type:*` label and never a `risk:*` label (the QA task puts `risk:*` on pull requests), and links each task or spike to its feature as a sub-issue. Never run it without `--dry-run` and do not create issues with the GitHub connector. Never edit `scripts/setup_github.py` for a project.
 
 The kit writes the docs and the initial plan. After that, the new project codes the issues. It creates a new issue, or changes requirements, docs or ADRs, only when the user explicitly asks for it, and docs changes always go through a pull request. Its autonomous tasks (coder and QA) never create issues or change docs.
 All files of a new project go in `output/<name>/`, never anywhere else in this repo. `output/` is in `.gitignore`.
