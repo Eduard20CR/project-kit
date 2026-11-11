@@ -1,6 +1,6 @@
 # Project Kit
 
-Project Kit is a toolbox for writing the documentation of a new project before any code is written.
+Project Kit does all the work of a new project before any code is written: the interview, the docs, the zip and the plan on GitHub (labels, milestones and issues). The new project only codes the issues.
 
 ## What it includes
 
@@ -18,6 +18,7 @@ Templates in `templates/`: one per document, so every project's docs look the sa
 2. Claude runs `scripts/new-project.sh <name>`, which creates `output/<name>/` with the folders, templates and skills.
 3. Run `/grill-with-docs` and describe the project. Claude fills in the docs from the interview.
 4. Claude runs `scripts/zip-project.sh <name>` and gives you `output/<name>.zip`.
-5. Unzip it at the root of the new repo.
+5. Create the new GitHub repo, unzip it at its root and push it.
+6. Back in this repo, Claude proposes the milestones, stories and tasks and writes them into `output/<name>.setup-github.sh`. You approve and run it once with `<owner>/<repo>`: it creates the labels, milestones and issues in the new repo.
 
 Claude follows [docs/documents.md](docs/documents.md), [docs/project-structure.md](docs/project-structure.md) and the templates in `templates/`.

@@ -16,8 +16,7 @@
 - Work is grouped Scrum style: milestone = sprint or epic, feature issue = user story, task issues = its sub-issues. Code tasks, not stories.
 - One branch and one pull request per task. Never push to `main`, never merge.
 - Run lint, typecheck and tests before pushing.
-- If a decision changes, add a new ADR in the same pull request.
-- When you create an issue through the GitHub connector, the issue forms are not applied: write the body with the same headings as the matching form in `.github/ISSUE_TEMPLATE/`.
+- Do not write docs, requirements, ADRs or issues. If a task needs a decision the docs do not cover, or the docs look wrong, do not decide: comment on the issue, add the `blocked` label and stop.
 
 ## Golden rules
 
