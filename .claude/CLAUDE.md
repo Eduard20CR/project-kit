@@ -14,7 +14,7 @@ This repo is a toolbox for writing the documentation of a new project before any
 3. Use the `skill-creator` skill to create the skills the new project needs.
 
 The docs of a new project go in that project's own repo, never in this one, following `docs/documents.md` and `docs/project-structure.md`. All docs are in English.
-If the kit has a template for a document, use it.
+Write each document from its template in `templates/` when one exists. A kit template wins over a skill's own format (for example, `domain-modeling`'s ADR format).
 
 ## How to work
 

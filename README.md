@@ -10,6 +10,8 @@ Skills in `.claude/skills/`:
 - `doc-coauthoring`: writes the docs with you, section by section.
 - `skill-creator`: creates the skills the new project needs.
 
+Templates in `templates/`: one per document, so every project's docs look the same.
+
 ## How to use it
 
 1. Open this repo in Claude Code.
