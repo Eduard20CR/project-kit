@@ -1,59 +1,19 @@
 # Project Kit
 
-Project Kit is a toolbox for writing the documentation of new projects before any code is written.
+Project Kit is a toolbox for writing the documentation of a new project before any code is written.
 
-## What the kit produces for each new project
+## What it includes
 
-- Requirements
-- Architecture
-- ADRs (Architecture Decision Records)
-- Database schema
-- C4 diagram
-- Real test cases: a few real examples with the expected result
-- Screens: only the important ones
-- The project's own README, CLAUDE.md and skills
+Skills in `.claude/skills/`:
 
-## Undecided
+- `grill-with-docs`: interviews you about the project. It uses `grilling` and `domain-modeling`, which also write the glossary and ADRs.
+- `doc-coauthoring`: writes the docs with you, section by section.
+- `skill-creator`: creates the skills the new project needs.
 
-- Glossary
-- Open questions list
+## How to use it
 
-## Out of scope
+1. Open this repo in Claude Code.
+2. Run `/grill-with-docs` and describe the new project.
+3. Ask Claude to write the docs with `doc-coauthoring`.
 
-- Environment inventory
-
-## What this repo itself has
-
-- Its own README, CLAUDE.md and skills
-
-## Project structure
-
-New projects use this folder structure. Folders marked "only if it applies" are added only when the project needs them.
-
-```
-.claude/CLAUDE.md           rules for Claude
-.github/workflows/          CI and deploy
-README.md
-apps/
-  web/                      frontend (src/, tests/)
-  api/                      backend (src/, tests/)
-shared/                     types and constants shared by the apps (only if it applies)
-db/                         database migrations, e.g. Liquibase (only if it applies)
-infra/
-  bootstrap/                resources created once (state, OIDC)
-  modules/                  reusable Terraform modules
-  environments/             one folder per environment (e.g. dev/, prod/)
-scripts/
-docs/
-  README.md                 scope by version and conventions
-  architecture.md           components, flows and repo structure
-  data-model.md             data model
-  c4.md                     C4 diagrams in Mermaid
-  requirements/
-    functional.md           FR-XX with acceptance criteria
-    non-functional.md       NFR-<AREA>-XX
-  adr/                      one decision per file
-  spikes/                   investigations behind decisions
-```
-
-All docs are in English.
+Claude follows [docs/documents.md](docs/documents.md) and [docs/project-structure.md](docs/project-structure.md).
