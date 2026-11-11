@@ -81,16 +81,16 @@ create_issue() {
   echo "$number"
 }
 
-# link_sub_issue <story number> <task number>
+# link_sub_issue <feature number> <task or spike number>
 link_sub_issue() {
-  local story="$1" task="$2"
+  local feature="$1" task="$2"
   local task_id
   task_id="$(gh api "repos/$repo/issues/$task" --jq .id)"
-  if gh api "repos/$repo/issues/$story/sub_issues?per_page=100" --jq '.[].number' | grep -qx "$task"; then
-    echo "Sub-issue already linked: #$task in #$story" >&2
+  if gh api "repos/$repo/issues/$feature/sub_issues?per_page=100" --jq '.[].number' | grep -qx "$task"; then
+    echo "Sub-issue already linked: #$task in #$feature" >&2
   else
-    gh api "repos/$repo/issues/$story/sub_issues" -F sub_issue_id="$task_id" > /dev/null
-    echo "Linked sub-issue: #$task in #$story" >&2
+    gh api "repos/$repo/issues/$feature/sub_issues" -F sub_issue_id="$task_id" > /dev/null
+    echo "Linked sub-issue: #$task in #$feature" >&2
   fi
 }
 
@@ -98,8 +98,8 @@ echo "Repository: $repo"
 create_labels
 create_milestones
 
-# Issues: create each story, then its tasks, and link each task to its story.
+# Issues: create each feature, then its tasks and spikes, and link each one to the feature.
 # Example (Claude replaces it with the approved plan):
-story="$(create_issue "{Story title}" "M1 {Thinnest end-to-end slice}" "type:feature" "01-story.md")"
+feature="$(create_issue "{Feature title}" "M1 {Thinnest end-to-end slice}" "type:feature" "01-feature.md")"
 task="$(create_issue "{Task title}" "M1 {Thinnest end-to-end slice}" "type:task" "01-01-task.md")"
-link_sub_issue "$story" "$task"
+link_sub_issue "$feature" "$task"
