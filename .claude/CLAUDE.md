@@ -9,12 +9,15 @@ This repo is a toolbox for writing the documentation of a new project before any
 
 ## How to document a new project
 
-1. Run `/grill-with-docs` to interview Oscar about the project. It uses the `grilling` and `domain-modeling` skills.
-2. Use the `doc-coauthoring` skill to write the docs section by section from the interview.
-3. Use the `skill-creator` skill to create the skills the new project needs.
+1. Run `scripts/new-project.sh <name>`. It creates `output/<name>/` with the folder structure, the templates in place and the skills.
+2. Run `/grill-with-docs` to interview Oscar about the project. It uses the `grilling` and `domain-modeling` skills.
+3. Fill in the files in `output/<name>/` from the interview, with the `doc-coauthoring` skill. Remove the template placeholders.
+4. Use the `skill-creator` skill if the new project needs its own skills.
+5. Run `scripts/zip-project.sh <name>` and give Oscar `output/<name>.zip`. He unzips it at the root of the new repo.
 
-The docs of a new project go in that project's own repo, never in this one, following `docs/documents.md` and `docs/project-structure.md`. All docs are in English.
-Write each document from its template in `templates/` when one exists. A kit template wins over a skill's own format (for example, `domain-modeling`'s ADR format).
+All files of a new project go in `output/<name>/`, never anywhere else in this repo. `output/` is in `.gitignore`.
+Follow `docs/documents.md` and `docs/project-structure.md`. All docs are in English.
+A kit template in `templates/` wins over a skill's own format (for example, `domain-modeling`'s ADR format).
 
 ## How to work
 
