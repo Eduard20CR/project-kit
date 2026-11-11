@@ -6,7 +6,7 @@ Write each one from its template in `templates/` when one exists.
 | File | For | What it contains |
 |---|---|---|
 | `README.md` | Anyone, non-technical | What the app is, how it works, roles, and what is and is not in v1 |
-| `docs/architecture.md` | Technical | How the components connect: C4 levels 1 and 2 in Mermaid, main flows, technologies with their ADRs |
+| `docs/architecture.md` | Technical | How the components connect: C4 levels 1 and 2 in Mermaid, main flows, technologies with their ADRs, the repository folder tree |
 | `docs/data-model.md` | Technical | Tables and relations as a Mermaid `erDiagram` |
 | `docs/adr/` | Technical | Why each important decision was made, one per file |
 | `docs/requirements/functional.md` | Everyone | What the app does, with acceptance criteria |

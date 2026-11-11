@@ -16,7 +16,7 @@ infra/
   environments/             one folder per environment (e.g. dev/, prod/)
 scripts/
 docs/
-  architecture.md           components, C4 levels 1-2 in Mermaid, flows
+  architecture.md           components, C4 levels 1-2 in Mermaid, flows, repo tree
   data-model.md             Mermaid erDiagram
   test-cases.md             real examples with the expected result
   screens.md                only the important screens
