@@ -19,7 +19,7 @@ After that, the new project just codes the issues. It adds an issue or changes a
 Each step starts with who does it: **User** (the person you work with) or **Claude** (you). Do only the Claude steps. When a step is the user's, tell them exactly what to do and wait until they say it is done.
 
 1. **User: create the project folder.** The user runs `npm run new-project -- <name>` in `scripts/`. It creates `output/<name>/` (the folder structure, the templates in place and the skills) and `output/<name>.plan/` (an example plan). Do not run it yourself: if `output/<name>/` does not exist yet, ask the user to run it.
-2. **Claude: interview the user.** Run `/grill-with-docs`. It uses the `grilling` and `domain-modeling` skills. Ask one question at a time.
+2. **User and Claude: the interview.** The user types `/grill-with-docs` in the chat to start it. Only the user can start this skill: it is set so that Claude cannot open it on its own. If the user has not typed it yet, ask them to. Then Claude interviews the user with it. It uses the `grilling` and `domain-modeling` skills. Ask one question at a time.
 3. **Claude: write the docs.** Fill in the files in `output/<name>/` from the interview, with the `doc-coauthoring` skill.
    - Then run `npm run check-placeholders -- <name>` in `scripts/`. It lists every `{placeholder}` left from the templates, with file and line, in two folders: the docs (`output/<name>/`) and the plan (`output/<name>.plan/`).
    - In this step, fix only the ones in `output/<name>/`. The ones in `output/<name>.plan/` are expected: the plan is still the example until step 6.
