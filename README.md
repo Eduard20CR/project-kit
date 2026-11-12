@@ -26,7 +26,7 @@ Scripts in `scripts/`, a small Node.js project (run `npm install` there once):
 ## How to use it
 
 1. In `scripts/`, run `npm install` once, then `npm run new-project -- <name>`. It creates `output/<name>/` with the folders, templates and skills.
-2. Start a Claude Code session in this repo and run `/grill-with-docs`. Describe the project and answer Claude's questions.
+2. Start a Claude Code session in this repo and run `/grill-with-docs`. Describe the project in detail and answer Claude's questions.
 3. Claude fills in the docs in `output/<name>/` from the interview.
 4. You and Claude review all the docs together, until everything is clear.
 5. Create a new, empty GitHub repo (no README, `.gitignore` or license). Clone it, copy everything inside `output/<name>/` to its root (including hidden folders like `.claude/` and `.github/`), commit and push to `main`. Then tell Claude the repo as `<owner>/<repo>`.
