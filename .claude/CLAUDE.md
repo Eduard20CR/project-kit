@@ -31,10 +31,16 @@ Each step starts with who does it: **User** (the person you work with) or **Clau
    4. Commit and push to `main`.
    5. Tell Claude the repo as `<owner>/<repo>` (for example `my-org/my-app`). Step 6 needs it.
 6. **Plan the work for the new repo, from this repo.** You never create anything on GitHub: at the end, the user runs a script that does it.
-   1. **Claude: propose the plan in the chat.** It has:
-      - Milestones. Each one is a vertical slice with a one-line "done" and no due date. M0 is the foundation: repo, CI and a smoke test. M1 is the thinnest slice that works end to end.
-      - The issues of each milestone. Each issue has one type: `feature` (a user story), `task` (technical work, one pull request) or `spike` (a time-boxed investigation).
-      - The feature each task or spike belongs to. A task or spike may stand alone (for example, the M0 tasks).
+   1. **Claude: propose the plan in the chat.** Claude creates the whole plan: the milestones, and the issues of each milestone (features, tasks and spikes). What each one is:
+      - **Milestone**: one stage of the project, like a sprint. It is a vertical slice: when it is done, something works from end to end (screen, API and data), not just one layer. It has a title and a one-line "done" (how we know it is finished), and no due date.
+      - **Feature**: something the end user can do, written as a user story ("As a <role>, I want <capability>, so that <benefit>"). It is not coded directly: its tasks are.
+      - **Task**: one piece of technical work that fits in one pull request. Most tasks belong to a feature. Some stand alone, like the setup tasks of M0.
+      - **Spike**: a short, time-boxed investigation that answers a question before coding (for example, "which PDF library works best?"). Its findings go in `docs/spikes/`. It may belong to a feature or stand alone.
+
+      Order the milestones so the project grows one stage at a time:
+      - **M0, foundation**: set up the project before any feature: the repo, the environments in the architecture doc, CI (the checks that run on every pull request), the deploy, and a smoke test. A smoke test is the simplest possible check that the app starts and answers, for example "the home page loads" or "the API health check returns 200". It tests no feature: it only proves that the build and the deploy work. M0 has no features, only stand-alone tasks.
+      - **M1, thinnest slice**: the smallest version of the main flow that works end to end, even if it is very basic (for example, upload one file and see one result). It proves that all the parts connect.
+      - **M2 and later**: one stage each, from the most important to the least. Each one adds a feature or completes one (more cases, errors, a better UI), and everything keeps working. Polish and nice-to-haves go last.
 
       This is the one place where the content itself goes in the chat, because the user must approve it before any file is written. Keep it a short list: each milestone with its title and "done", and under it each issue with its id, type, title and feature. The full fields (acceptance criteria, files, references) go only in the JSON files of step 6.3.
    2. **User: approve the plan.** Wait for the user's OK. Change the plan until they approve it. Write no files before that.
