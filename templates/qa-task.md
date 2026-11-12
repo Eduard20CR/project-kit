@@ -15,7 +15,7 @@ You are reviewing one pull request on the repository {owner}/{repo}. You review 
 
 1. Find the pull request: the open pull request into `main` whose head commit is `git rev-parse HEAD`. If there is none, stop.
 2. Read `.claude/CLAUDE.md`, the pull request body and the issue it closes. `docs/` is the source of truth.
-3. Fetch `origin/main` and review the diff `origin/main...HEAD` with `/code-review` and then `/security-review`. Do not post inline comments; collect the findings.
+3. Fetch `origin/main` and review the diff `origin/main...HEAD`: run `/code-review <n>`, with `<n>` the pull request number from step 1, and then `/security-review`. Do not post inline comments; collect the findings.
 4. Choose the risk:
    - `risk:high` if the diff touches infra, auth, IAM, secrets, AI prompts or data deletion, whatever the findings.
    - `risk:medium` if it changes what the app does, or if the review found a real bug.
