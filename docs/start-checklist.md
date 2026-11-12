@@ -17,9 +17,11 @@ The user's checklist for starting a new project: go through it to be sure you fo
 - [ ] Asked a new Claude session, with no context, to read all the docs, and it found nothing unclear.
 - [ ] `npm run check-placeholders -- <name>`, in `scripts/`, finds nothing in `output/<name>/`. The plan still has placeholders: it is checked in step 4.
 
-## 3. Repo
+## 3. Repo and claude.ai
 
 - [ ] Created the GitHub repo, copied the contents of `output/<name>/` to its root and pushed it.
+- [ ] Installed the Claude GitHub App on the repo.
+- [ ] Created one claude.ai project for the repo.
 
 ## 4. Plan on GitHub
 
