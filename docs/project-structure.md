@@ -4,6 +4,8 @@ New projects use this folder structure. Folders marked "only if it applies" are 
 
 ```
 .claude/CLAUDE.md           rules for Claude
+.claude/skills/             skills for Claude, copied from the kit
+skills-lock.json            skill versions, for `npx skills update`
 .github/workflows/          CI and deploy
 .github/ISSUE_TEMPLATE/     issue forms: feature, task, bug, spike
 .github/pull_request_template.md  pull request body: Spanish overview, English detail
