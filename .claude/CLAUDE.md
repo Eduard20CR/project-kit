@@ -3,10 +3,10 @@
 This repo gets a new project ready before any code is written:
 
 1. Interview the user about the project.
-2. Write the docs and create the project folder.
+2. Write the docs and edit the file in the project folder.
 3. Plan the work on GitHub: labels, milestones and issues.
 
-After that, the new project just codes the issues. It adds an issue or changes a doc only when the user asks for it.
+After that, the new project just codes the issues, and it adds issues or changes the docs only when the user asks for it.
 
 `docs/documents.md` lists what the kit produces for each new project.
 
