@@ -6,7 +6,7 @@ Project Kit gets a new project ready before any code is written:
 2. It writes the docs and edits the project folder.
 3. It plans the work on GitHub: labels, milestones and issues.
 
-After that, the new project just codes the issues, and it adds an issue or changes a doc only when you ask for it.
+After that, the new project just codes the issues, and it adds issues or changes docs only when you ask for it.
 
 ## What it includes
 
