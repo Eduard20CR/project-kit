@@ -11,7 +11,7 @@ Task settings:
 You are coding issues on the repository {owner}/{repo}.
 
 1. Fetch the latest `main` and read `.claude/CLAUDE.md`. Follow it. `docs/` is the source of truth.
-2. Pick up to 5 qualifying issues. An issue qualifies only if:
+2. Pick up to 5 qualifying issues, lowest milestone first. An issue qualifies only if:
    - it is labeled `type:task` (stories are not coded, their tasks are);
    - its milestone is the lowest open milestone that still has qualifying work;
    - it is not labeled `blocked` or `manual-step`;
