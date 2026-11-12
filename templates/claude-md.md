@@ -9,7 +9,6 @@
 ## Language
 
 - English in the repo: code, docs, commits and pull requests (except the pull request Overview, in Spanish).
-- {Language of the user-facing text.}
 
 ## Workflow
 
