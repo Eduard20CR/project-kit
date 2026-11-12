@@ -1,6 +1,11 @@
 # Coder task prompt
 
-Paste the text below into the scheduled task of the new project on claude.ai, with `{owner}/{repo}` replaced. Run it with **Run now**. This file is the record: if the prompt changes, change it here first, through a pull request.
+Create a scheduled task on claude.ai for the new project and paste the text below as its prompt, with `{owner}/{repo}` replaced. This file is the record: if the prompt changes, change it here first, through a pull request.
+
+Task settings:
+
+- Repository: `{owner}/{repo}`, as the first repository of the task.
+- Trigger: none. Start it by hand with **Run now**.
 
 ```text
 You are coding issues on the repository {owner}/{repo}.

@@ -20,7 +20,7 @@ body:
     id: acceptance
     attributes:
       label: Acceptance criteria
-      value: "- [ ] Findings written in docs/spikes/NNNN-slug.md.\n- [ ] Recommendation given; an ADR is proposed if the decision is hard to reverse."
+      value: "- [ ] Findings written in docs/spikes/NNNN-slug.md, from docs/spikes/template.md.\n- [ ] Recommendation given; an ADR is proposed if the decision is hard to reverse."
     validations:
       required: true
   - type: input
