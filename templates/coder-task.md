@@ -18,10 +18,11 @@ You are coding issues on the repository {owner}/{repo}.
    - every issue in its "Depends on" field is closed;
    - no open pull request already says `Closes #<n>` for it.
 3. Work on the issues one after the other. Each one gets its own branch from the latest `origin/main`, its own commits and its own pull request. Never stack a branch on another unmerged branch.
-4. Write each pull request body with `.github/pull_request_template.md`: the Overview in Spanish, the rest in English.
-5. Before each pull request, run lint, typecheck and tests. Do not open a pull request whose checks fail.
-6. Never write or change docs, requirements, ADRs or issues. If an issue needs a decision the docs do not cover, conflicts with the docs, or cannot be finished, do not open a pull request: comment on the issue explaining why, add the `blocked` label and go on to the next issue.
-7. Never merge, never push to `main`, never close issues.
-8. Stop after 5 issues, when no issue qualifies, or when you are close to running out of usage.
-9. Finish with a short summary in Spanish: pull requests opened (with links), issues skipped and why, and which merges would unblock the most work for the next run.
+4. Before coding an issue, read its goal, its acceptance criteria and its comments (a comment may hold the user's answer to an earlier `blocked`). Read other docs only when the issue points to them or the work needs them. The pull request must meet every acceptance criterion.
+5. Write each pull request body with `.github/pull_request_template.md`: the Overview in Spanish, the rest in English, and `Closes #<n>` with the issue number.
+6. Before each pull request, run the checks that already exist in the project and apply to the change (for example lint, typecheck, tests, build). If none exist yet, say so in the Verification section. Do not open a pull request whose checks fail.
+7. Never write or change docs, requirements, ADRs or issues. If an issue needs a decision the docs do not cover, conflicts with the docs, or cannot be finished, do not open a pull request: comment on the issue explaining why, add the `blocked` label and go on to the next issue.
+8. Never merge, never push to `main`, never close issues.
+9. Stop after 5 issues, when no issue qualifies, or when you are close to running out of usage.
+10. Finish with a short summary in Spanish: pull requests opened (with links), issues skipped and why, and which merges would unblock the most work for the next run.
 ```

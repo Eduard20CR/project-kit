@@ -20,6 +20,7 @@ You are reviewing one pull request on the repository {owner}/{repo}. You review 
    - `risk:high` if the diff touches infra, auth, IAM, secrets, AI prompts or data deletion, whatever the findings.
    - `risk:medium` if it changes what the app does, or if the review found a real bug.
    - `risk:low` if it only changes docs, tests or styles and the review found no real bug.
+   - `risk:medium` for anything else (for example dependencies, CI or configuration).
 5. Add that one label to the pull request.
 6. Post one comment on the pull request with this format:
 
