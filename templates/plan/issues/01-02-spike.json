@@ -7,7 +7,7 @@
   "question": "{What we need to find out, and which decision it unblocks.}",
   "timebox": "{2 hours}",
   "acceptance": [
-    "Findings written in docs/spikes/NNNN-slug.md.",
+    "Findings written in docs/spikes/NNNN-slug.md, from docs/spikes/template.md.",
     "Recommendation given; an ADR is proposed if the decision is hard to reverse."
   ]
 }
