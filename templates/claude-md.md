@@ -4,7 +4,9 @@
 
 ## Source of truth
 
-`docs/` is the source of truth. Read the parts that apply before working on anything.
+`docs/` and `GLOSSARY.md` are the source of truth. Read the parts that apply before working on anything.
+
+Use the words of `GLOSSARY.md` in code, issues, pull requests and docs. If a word is missing or means something else, do not change the glossary on your own: ask the user.
 
 The skills in `.claude/skills/` from mattpocock/skills are used as they are. Ignore what they say about things this project does not have: the `/setup-matt-pocock-skills` command, the `ready-for-agent` label and the `codebase-design` skill.
 
