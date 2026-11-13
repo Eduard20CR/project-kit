@@ -1,12 +1,12 @@
 name: Spike
-description: A time-boxed investigation to answer a question before deciding.
+description: A time-boxed investigation to be able to decide.
 labels: ["type:spike"]
 body:
   - type: textarea
     id: question
     attributes:
       label: Question
-      description: What we need to find out, and which decision it unblocks.
+      description: What we need to find out to be able to decide.
     validations:
       required: true
   - type: input
@@ -17,14 +17,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: acceptance
+    id: result
     attributes:
-      label: Acceptance criteria
-      value: "- [ ] Findings written in docs/spikes/NNNN-slug.md, from docs/spikes/template.md.\n- [ ] Recommendation given; an ADR is proposed if the decision is hard to reverse."
-    validations:
-      required: true
-  - type: input
-    id: depends-on
-    attributes:
-      label: Depends on
-      description: Issues that must be closed first. Leave empty if none.
+      label: Result
+      description: Written in the issue when the spike ends. If it decides something important, it becomes an ADR.

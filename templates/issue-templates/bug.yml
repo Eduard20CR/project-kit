@@ -1,12 +1,11 @@
 name: Bug
-description: Something that does not work as the docs say.
+description: Something that broke.
 labels: ["type:bug"]
 body:
   - type: textarea
-    id: what-happens
+    id: steps
     attributes:
-      label: What happens
-      description: Steps to reproduce and what you see.
+      label: Steps to reproduce
       value: "1. "
     validations:
       required: true
@@ -14,23 +13,20 @@ body:
     id: expected
     attributes:
       label: Expected
-      description: What should happen, with the requirement it breaks (e.g. FR-03).
+      description: What was expected to happen.
     validations:
       required: true
   - type: textarea
-    id: acceptance
+    id: actual
     attributes:
-      label: Acceptance criteria
-      value: "- [ ] The steps above give the expected result.\n- [ ] A test covers this case."
+      label: Actual
+      description: What happened.
     validations:
       required: true
-  - type: textarea
-    id: files
+  - type: input
+    id: environment
     attributes:
-      label: Files
-      description: Files where the bug probably is, if known.
-  - type: textarea
-    id: notes
-    attributes:
-      label: Notes
-      description: Logs, screenshots, environment.
+      label: Environment
+      description: Where it happened (e.g. production, local).
+    validations:
+      required: true

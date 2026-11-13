@@ -1,0 +1,22 @@
+name: Retro
+description: One per sprint, inside its milestone. Filled in when the sprint ends.
+labels: ["type:retro"]
+body:
+  - type: textarea
+    id: went-well
+    attributes:
+      label: What went well
+  - type: textarea
+    id: went-wrong
+    attributes:
+      label: What went wrong
+  - type: textarea
+    id: pending
+    attributes:
+      label: What is pending
+  - type: textarea
+    id: actions
+    attributes:
+      label: Actions
+      description: Each action becomes a linked issue or pull request. The retro closes when every action has its own.
+      value: "- [ ] "

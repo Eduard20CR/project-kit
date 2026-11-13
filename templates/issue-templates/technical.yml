@@ -1,0 +1,14 @@
+name: Technical item
+description: Necessary work the user does not see. Child of an epic.
+labels: ["type:technical"]
+body:
+  - type: markdown
+    attributes:
+      value: "The title is a verb with what is done (e.g. Set up the deploy pipeline to AWS)."
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: One line (e.g. so that every push to main is tested and deployed on its own).
+    validations:
+      required: true
