@@ -1,6 +1,7 @@
 # Documents
 
-The documents every new project gets, and what each one is for. All docs are in English.
+The six base docs every new project gets, and what each one is for. All docs are in English.
+The backlog (epics, stories and technical items) lives on GitHub, not in the docs.
 Write each one from its template in `templates/` when one exists.
 
 | File | For | What it contains |
@@ -9,11 +10,8 @@ Write each one from its template in `templates/` when one exists.
 | `docs/architecture.md` | Technical | How the components connect: C4 levels 1 and 2 in Mermaid, main flows, technologies with their ADRs, the repository folder tree |
 | `docs/data-model.md` | Technical | Tables and relations as a Mermaid `erDiagram`, and why each table exists |
 | `docs/adr/` | Technical | Why each important decision was made, one per file |
-| `docs/requirements/functional.md` | Everyone | What the app does, with acceptance criteria |
-| `docs/requirements/non-functional.md` | Technical | Numbers for security, cost, performance, etc. |
-| `docs/spikes/` | Technical | Investigations done before a decision |
-| `docs/milestones/` | Everyone | One closing log per closed milestone: app state, "done" check, docs fixed, retro, rules added to CLAUDE.md. Claude writes it when the user asks to close a milestone |
-| `.claude/CLAUDE.md` and `.claude/skills/` | Claude | Rules and skills for working on the project |
+| `docs/non-functional-requirements.md` | Technical | Numbers for security, cost, performance, etc. |
+| `.claude/CLAUDE.md` | Claude | Rules for working on the project |
 
 ## The plan (outside the project folder)
 
