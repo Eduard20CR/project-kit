@@ -36,10 +36,7 @@ const folders = [
   "infra/modules",
   "infra/environments",
   "scripts",
-  "docs/requirements",
   "docs/adr",
-  "docs/spikes",
-  "docs/milestones",
 ];
 for (const folder of folders) {
   mkdirSync(join(target, folder), { recursive: true });
@@ -52,11 +49,8 @@ const templates = [
   ["claude-md.md", ".claude/CLAUDE.md"],
   ["architecture.md", "docs/architecture.md"],
   ["data-model.md", "docs/data-model.md"],
-  ["functional-requirements.md", "docs/requirements/functional.md"],
-  ["non-functional-requirements.md", "docs/requirements/non-functional.md"],
+  ["non-functional-requirements.md", "docs/non-functional-requirements.md"],
   ["adr.md", "docs/adr/0000-template.md"],
-  ["spike.md", "docs/spikes/template.md"],
-  ["milestone-log.md", "docs/milestones/template.md"],
   // GitHub issue forms, so every issue has the same fields.
   ["issue-templates", ".github/ISSUE_TEMPLATE"],
   // Pull request template: Spanish overview on top, English detail below.
