@@ -12,16 +12,15 @@
 
 ## Workflow
 
-- Work is grouped Scrum style: milestone = sprint or epic, feature issue = user story, task issues = its sub-issues. Code tasks, not stories.
+- Work is grouped Scrum style: an epic groups stories and technical items; each story or technical item is split into tasks (sub-issues), one pull request each. A sprint is a milestone; the backlog is every issue without a milestone. Code tasks, not stories.
 - One branch and one pull request per task. Never push to `main`, never merge.
 - Write the pull request body with `.github/pull_request_template.md`: the Overview in Spanish, the rest in English.
 - Before pushing, run the checks that already exist in the project and apply to the change (for example lint, typecheck, tests, build).
 - Do not start an issue while an issue in its "Depends on" (blocked by) is still open.
 - While coding a task, do not write requirements, ADRs or issues. The one exception: when the change alters what `docs/architecture.md` or `docs/data-model.md` describe, update them in the same pull request. Never change an ADR. If a task needs a decision the docs do not cover, or the docs look wrong, do not decide: comment on the issue, add the `blocked` label and stop working on that task.
 - Create a new issue, or change docs, requirements or ADRs, only when the user explicitly asks for it:
-  - An issue uses the matching form in `.github/ISSUE_TEMPLATE/`, one `type:*` label and a milestone. Never put `risk:*` labels on issues: they are for pull requests.
+  - An issue uses the matching form in `.github/ISSUE_TEMPLATE/`, one `type:*` label and, for a story or technical item, a `size:*` and a `priority:*` label. Never put `risk:*` labels on issues: they are for pull requests.
   - Docs changes go through a pull request. A changed decision is a new ADR.
-- Write the milestone closing log in `docs/milestones/` only when asked to close a milestone.
 
 ## Definition of Done
 
