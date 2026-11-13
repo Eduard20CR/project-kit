@@ -26,7 +26,7 @@ You are coding issues on the repository {owner}/{repo}.
    - The pull request must meet every acceptance criterion.
 5. Write each pull request body with `.github/pull_request_template.md`: the Overview in Spanish, the rest in English, and `Closes #<n>` with the issue number.
 6. Before each pull request, run the checks that already exist in the project and apply to the change (for example lint, typecheck, tests, build). If none exist yet, say so in the Verification section. Do not open a pull request whose checks fail.
-7. Never write or change docs, requirements, ADRs or issues. If an issue needs a decision the docs do not cover, conflicts with the docs, or cannot be finished, do not open a pull request: comment on the issue explaining why, add the `blocked` label and go on to the next issue.
+7. Never write or change requirements, ADRs or issues. The one exception: when the change alters what `docs/architecture.md` or `docs/data-model.md` describe, update them in the same pull request. If an issue needs a decision the docs do not cover, conflicts with the docs, or cannot be finished, do not open a pull request: comment on the issue explaining why, add the `blocked` label and go on to the next issue.
 8. Never merge, never push to `main`, never close issues.
 9. Stop after 5 issues, when no issue qualifies, or when you are close to running out of usage.
 10. Finish with a short summary in Spanish: pull requests opened (with links), issues skipped and why, and which merges would unblock the most work for the next run.
