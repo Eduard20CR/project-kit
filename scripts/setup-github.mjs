@@ -1,43 +1,54 @@
 #!/usr/bin/env node
-// Creates a new project's labels, milestones and issues on GitHub from a JSON plan.
+// Creates a new project's labels and backlog on GitHub from JSON files.
 //
-// The plan is data only. Claude fills it in from the plan the user approves; this script
-// never changes per project.
+// The backlog is data only: one JSON file per issue. Claude writes it with the user; this
+// script never changes per project. It creates no milestones: everything stays in the backlog,
+// and each sprint gets its milestone at planning time.
 //
 //     output/<name>.backlog/
-//     ├── milestones.json      [{ "id": "M0", "title": "M0 Foundation", "done": "..." }]
 //     └── issues/
-//         ├── 01-feature.json  one file per issue
-//         └── 01-01-task.json
+//         ├── 01-epic.json           one file per issue
+//         ├── 01-01-technical.json
+//         └── 02-01-story.json
 //
 // Usage, from scripts/ (run `npm install` there once first):
 //     npm run setup-github -- <name> <owner>/<repo> --dry-run
 //     npm run setup-github -- <name> <owner>/<repo>
-// It reads the plan in output/<name>.backlog/.
+// It reads the backlog in output/<name>.backlog/.
 //
 // What it does:
-// 1. Checks the whole plan. If anything is wrong, it prints every problem and creates nothing.
+// 1. Checks the whole backlog. If anything is wrong, it prints every problem and creates nothing.
 // 2. With --dry-run, prints what it would create and stops. It does not call GitHub.
 // 3. Otherwise, with the GitHub CLI (`gh`, logged in): creates or updates the labels, creates
-//    the milestones, creates the issues (each one after its feature and the issues it depends
-//    on) and links each task or spike to its feature as a sub-issue. Milestones, issues (same
-//    title) and links that already exist are skipped, so it is safe to run again.
+//    the issues (each epic first, and each issue after the issues it depends on) and links each
+//    story or technical item to its epic as a sub-issue. Issues (same title) and links that
+//    already exist are skipped, so it is safe to run again.
 //
 // `gh` is always called with a list of arguments (never through a shell), so quotes and
 // other characters in titles are safe.
 
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
-import { basename, join } from "node:path";
+import { join } from "node:path";
 import { z } from "zod";
 
 // Labels the new repo gets: [name, color, description].
+// Each type:* label has the description of its form in templates/issue-templates/.
 // The risk:* labels are for pull requests (the QA task sets them), never for issues.
 const LABELS = [
-  ["type:feature", "1D76DB", "User story"],
-  ["type:task", "5319E7", "Technical task, one pull request"],
-  ["type:bug", "D73A4A", "Something does not work as the docs say"],
-  ["type:spike", "FBCA04", "Time-boxed investigation"],
+  ["type:epic", "3E4B9E", "Groups large work. It never goes into a sprint whole; its children do."],
+  ["type:story", "1D76DB", "Something the user notices. Child of an epic."],
+  ["type:technical", "5319E7", "Necessary work the user does not see. Child of an epic."],
+  ["type:task", "C5DEF5", "A technical piece of a story or technical item. One pull request each."],
+  ["type:bug", "D73A4A", "Something that broke."],
+  ["type:spike", "FBCA04", "A time-boxed investigation to be able to decide."],
+  ["type:retro", "BFDADC", "One per sprint, inside its milestone. Filled in when the sprint ends."],
+  ["size:S", "C2E0C6", "1 or 2 pull requests."],
+  ["size:M", "7BCF8F", "3 to 5 pull requests."],
+  ["size:L", "2DA44E", "More; it is split before it enters a sprint."],
+  ["priority:high", "B60205", "The app is useless without it."],
+  ["priority:medium", "F9D0C4", "Important, but the app already works without it."],
+  ["priority:low", "EDEDED", "Nice to have."],
   ["risk:low", "0E8A16", "Quick review"],
   ["risk:medium", "FBCA04", "Review the marked lines"],
   ["risk:high", "B60205", "Infra, auth, IAM, secrets, prompts or data deletion: full review"],
@@ -46,96 +57,55 @@ const LABELS = [
 ];
 
 // ---------------------------------------------------------------------------
-// 1. The shape of the plan
+// 1. The shape of the backlog
 // ---------------------------------------------------------------------------
 
 const text = z.string().trim().min(1, "must be a non-empty string");
-const textList = z.array(text);
 
-// strictObject rejects any field that is not listed.
-const milestonesSchema = z
-  .array(z.strictObject({ id: text, title: text, done: text }))
-  .min(1, "must list at least one milestone");
+// Fields of a story and a technical item, besides their form. `epic` and `depends_on` are issue ids.
+const child = {
+  id: text,
+  epic: text,
+  title: text,
+  size: z.enum(["S", "M", "L"], { error: "must be S, M or L" }),
+  priority: z.enum(["high", "medium", "low"], { error: "must be high, medium or low" }),
+  depends_on: z.array(text).optional(),
+};
 
-// Fields every issue has. `milestone` is a milestone id; `feature` and `depends_on` are issue ids.
-const common = { id: text, milestone: text, title: text };
-
-// One schema per issue form in templates/issue-templates/.
+// One schema per type. strictObject rejects any field that is not listed.
 const issueSchema = z.discriminatedUnion(
   "type",
   [
-    z.strictObject({
-      ...common,
-      type: z.literal("feature"),
-      story: text,
-      acceptance: textList.min(1, "needs at least one item"),
-      references: textList,
-      files: textList.optional(),
-      depends_on: textList.optional(),
-      notes: text.optional(),
-    }),
-    z.strictObject({
-      ...common,
-      type: z.literal("task"),
-      feature: text.optional(),
-      goal: text,
-      acceptance: textList.min(1, "needs at least one item"),
-      references: textList.optional(),
-      files: textList.optional(),
-      depends_on: textList.optional(),
-      notes: text.optional(),
-    }),
-    z.strictObject({
-      ...common,
-      type: z.literal("spike"),
-      feature: text.optional(),
-      question: text,
-      timebox: text,
-      acceptance: textList.min(1, "needs at least one item"),
-      depends_on: textList.optional(),
-    }),
+    z.strictObject({ id: text, type: z.literal("epic"), title: text, groups: text }),
+    z.strictObject({ ...child, type: z.literal("story"), story: text }),
+    z.strictObject({ ...child, type: z.literal("technical"), why: text }),
   ],
-  { error: "must be feature, task or spike" },
+  { error: "must be epic, story or technical" },
 );
 
 // The sections of each issue body, in the order of its form: [field, heading].
-// A task's "Story" section shows the issue number of its feature.
+// "Acceptance criteria" and "Out of scope" stay empty: they are written when the story is refined.
+// "Depends on" is not in the forms; it is added at the end when the issue has depends_on.
 const BODY_SECTIONS = {
-  feature: [
+  epic: [["groups", "What it groups"]],
+  story: [
     ["story", "User story"],
     ["acceptance", "Acceptance criteria"],
-    ["references", "References"],
-    ["files", "Files"],
+    ["out_of_scope", "Out of scope"],
     ["depends_on", "Depends on"],
-    ["notes", "Notes"],
   ],
-  task: [
-    ["goal", "Goal"],
-    ["acceptance", "Acceptance criteria"],
-    ["references", "References"],
-    ["feature", "Story"],
-    ["files", "Files"],
-    ["depends_on", "Depends on"],
-    ["notes", "Notes"],
-  ],
-  spike: [
-    ["question", "Question"],
-    ["timebox", "Time box"],
-    ["acceptance", "Acceptance criteria"],
+  technical: [
+    ["why", "Why"],
     ["depends_on", "Depends on"],
   ],
 };
 
 // ---------------------------------------------------------------------------
-// 2. Read and check the plan
+// 2. Read and check the backlog
 // ---------------------------------------------------------------------------
 
 /** Reads a JSON file and checks it against a schema. Returns the data, or undefined. */
 function readFile(path, schema, problems) {
-  if (!existsSync(path)) {
-    problems.push(`${path}: file not found`);
-    return undefined;
-  }
   let data;
   try {
     data = JSON.parse(readFileSync(path, "utf8"));
@@ -159,7 +129,7 @@ function findDuplicates(values) {
   return [...new Set(values.filter((value, index) => values.indexOf(value) !== index))];
 }
 
-/** Puts each issue after its feature and the issues it depends on. Reports the first cycle. */
+/** Puts each issue after its epic and the issues it depends on. Reports the first cycle. */
 function sortByDependencies(issues, problems) {
   const byId = new Map(issues.map((issue) => [issue.id, issue]));
   const sorted = [];
@@ -173,7 +143,7 @@ function sortByDependencies(issues, problems) {
       return;
     }
     path.push(issue.id);
-    for (const id of [issue.feature, ...(issue.depends_on ?? [])]) {
+    for (const id of [issue.epic, ...(issue.depends_on ?? [])]) {
       if (id) visit(byId.get(id));
     }
     path.pop();
@@ -184,12 +154,11 @@ function sortByDependencies(issues, problems) {
   return sorted;
 }
 
-/** Returns { milestones, issues }, with the issues in creation order. Exits if the plan is wrong. */
-function loadPlan(planDir) {
+/** Returns the issues in creation order. Exits if the backlog is wrong. */
+function loadBacklog(backlogDir) {
   const problems = [];
-  const issuesDir = join(planDir, "issues");
+  const issuesDir = join(backlogDir, "issues");
 
-  const milestones = readFile(join(planDir, "milestones.json"), milestonesSchema, problems) ?? [];
   const files = existsSync(issuesDir) ? readdirSync(issuesDir).filter((name) => name.endsWith(".json")).sort() : [];
   if (files.length === 0) problems.push(`${issuesDir}: no issue files (*.json) found`);
 
@@ -201,23 +170,16 @@ function loadPlan(planDir) {
 
   // Checks that need more than one file.
   for (const field of ["id", "title"]) {
-    for (const value of findDuplicates(milestones.map((m) => m[field]))) {
-      problems.push(`milestones.json: duplicate ${field} '${value}'`);
-    }
     for (const value of findDuplicates(issues.map((i) => i[field]))) {
       const files = issues.filter((i) => i[field] === value).map((i) => i.file);
       problems.push(`${files.join(", ")}: duplicate ${field} '${value}'`);
     }
   }
 
-  const milestoneIds = new Set(milestones.map((m) => m.id));
   const byId = new Map(issues.map((issue) => [issue.id, issue]));
   for (const issue of issues) {
-    if (milestones.length && !milestoneIds.has(issue.milestone)) {
-      problems.push(`${issue.file}: unknown milestone id '${issue.milestone}'`);
-    }
-    if (issue.feature && byId.get(issue.feature)?.type !== "feature") {
-      problems.push(`${issue.file}: 'feature' must be the id of a feature, not '${issue.feature}'`);
+    if (issue.epic && byId.get(issue.epic)?.type !== "epic") {
+      problems.push(`${issue.file}: 'epic' must be the id of an epic, not '${issue.epic}'`);
     }
     for (const id of issue.depends_on ?? []) {
       if (!byId.has(id)) problems.push(`${issue.file}: 'depends_on' has an unknown id '${id}'`);
@@ -227,31 +189,31 @@ function loadPlan(planDir) {
 
   const sorted = problems.length ? [] : sortByDependencies(issues, problems);
   if (problems.length) {
-    console.error("The plan has problems. Nothing was created.");
+    console.error("The backlog has problems. Nothing was created.");
     for (const problem of problems) console.error(`  - ${problem}`);
     process.exit(1);
   }
-  return { milestones, issues: sorted };
+  return sorted;
 }
 
 // ---------------------------------------------------------------------------
-// 3. Build the issue bodies
+// 3. Build the labels and bodies of each issue
 // ---------------------------------------------------------------------------
+
+/** The labels of an issue: its type, and the size and priority of a story or technical item. */
+function labelsOf(issue) {
+  if (issue.type === "epic") return ["type:epic"];
+  return [`type:${issue.type}`, `size:${issue.size}`, `priority:${issue.priority}`];
+}
 
 /** Builds the Markdown body with the form headings. issueRef(id) writes another issue, e.g. "#12". */
 function buildBody(issue, issueRef) {
-  const format = {
-    acceptance: (items) => items.map((item) => `- [ ] ${item}`).join("\n"),
-    references: (items) => items.join(", "),
-    files: (items) => items.map((item) => `- ${item}`).join("\n"),
-    depends_on: (ids) => ids.map(issueRef).join(", "),
-    feature: (id) => issueRef(id),
-  };
-  const sections = BODY_SECTIONS[issue.type].map(([field, heading]) => {
+  const sections = BODY_SECTIONS[issue.type].flatMap(([field, heading]) => {
     const value = issue[field];
-    const empty = value === undefined || value.length === 0;
-    const content = empty ? "_No response_" : (format[field] ?? String)(value);
-    return `### ${heading}\n\n${content}`;
+    if (field === "depends_on") {
+      return value?.length ? [`### ${heading}\n\n${value.map(issueRef).join(", ")}`] : [];
+    }
+    return [`### ${heading}\n\n${value ?? "_No response_"}`];
   });
   return `${sections.join("\n\n")}\n`;
 }
@@ -291,25 +253,11 @@ function post(path, payload) {
   return gh(["api", path, "--method", "POST", "--input", "-"], payload);
 }
 
-function applyPlan(repo, milestones, issues) {
+function applyBacklog(repo, issues) {
   console.log("Labels:");
   for (const [name, color, description] of LABELS) {
     gh(["label", "create", name, "--repo", repo, "--color", color, "--description", description, "--force"]);
     console.log(`  Created or updated: ${name}`);
-  }
-
-  console.log("Milestones:");
-  const milestoneNumbers = new Map(); // milestone id -> GitHub number
-  const existingMilestones = getAll(`repos/${repo}/milestones?state=all`);
-  for (const milestone of milestones) {
-    let found = existingMilestones.find((m) => m.title === milestone.title);
-    if (found) {
-      console.log(`  Already exists: ${milestone.title}`);
-    } else {
-      found = post(`repos/${repo}/milestones`, { title: milestone.title, description: `Done when: ${milestone.done}` });
-      console.log(`  Created: ${milestone.title}`);
-    }
-    milestoneNumbers.set(milestone.id, found.number);
   }
 
   console.log("Issues:");
@@ -324,8 +272,7 @@ function applyPlan(repo, milestones, issues) {
       found = post(`repos/${repo}/issues`, {
         title: issue.title,
         body: buildBody(issue, (id) => `#${onGitHub.get(id).number}`),
-        milestone: milestoneNumbers.get(issue.milestone),
-        labels: [`type:${issue.type}`],
+        labels: labelsOf(issue),
       });
       console.log(`  Created: #${found.number} ${issue.title}`);
     }
@@ -333,8 +280,8 @@ function applyPlan(repo, milestones, issues) {
   }
 
   console.log("Sub-issues:");
-  for (const issue of issues.filter((i) => i.feature)) {
-    const parent = onGitHub.get(issue.feature).number;
+  for (const issue of issues.filter((i) => i.epic)) {
+    const parent = onGitHub.get(issue.epic).number;
     const child = onGitHub.get(issue.id);
     const linked = getAll(`repos/${repo}/issues/${parent}/sub_issues`).some((item) => item.number === child.number);
     if (linked) {
@@ -346,18 +293,16 @@ function applyPlan(repo, milestones, issues) {
   }
 }
 
-function printDryRun(repo, milestones, issues) {
+function printDryRun(repo, issues) {
   console.log(`Dry run for ${repo}: nothing is created.\n`);
   console.log(`Labels: ${LABELS.map(([name]) => name).join(", ")}\n`);
-  console.log("Milestones:");
-  for (const milestone of milestones) console.log(`  ${milestone.title} (Done when: ${milestone.done})`);
-  console.log("\nIssues, in creation order:");
+  console.log("Milestones: none (each sprint gets its milestone at planning time)\n");
+  console.log("Issues, in creation order:");
   issues.forEach((issue, index) => {
     console.log(`\n[${index + 1}] ${issue.title}`);
     console.log(`    file: ${issue.file}`);
-    console.log(`    label: type:${issue.type}`);
-    console.log(`    milestone: ${milestones.find((m) => m.id === issue.milestone).title}`);
-    if (issue.feature) console.log(`    sub-issue of: ${issues.find((i) => i.id === issue.feature).title}`);
+    console.log(`    labels: ${labelsOf(issue).join(", ")}`);
+    if (issue.epic) console.log(`    sub-issue of: ${issues.find((i) => i.id === issue.epic).title}`);
     console.log("    body:");
     for (const line of buildBody(issue, (id) => `#<${id}>`).trimEnd().split("\n")) {
       console.log(line ? `      ${line}` : "");
@@ -378,13 +323,13 @@ if (!name || !repo || rest.length || !/^[\w.-]+\/[\w.-]+$/.test(repo)) {
   process.exit(1);
 }
 
-const planDir = join(import.meta.dirname, "..", "output", `${name}.backlog`);
+const backlogDir = join(import.meta.dirname, "..", "output", `${name}.backlog`);
 
-const { milestones, issues } = loadPlan(planDir);
+const issues = loadBacklog(backlogDir);
 if (dryRun) {
-  printDryRun(repo, milestones, issues);
+  printDryRun(repo, issues);
 } else {
   console.log(`Repository: ${repo}`);
-  applyPlan(repo, milestones, issues);
+  applyBacklog(repo, issues);
   console.log("Done.");
 }
