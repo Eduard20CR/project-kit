@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Creates output/<name>/ with the folder structure, the templates in place and the skills,
-// and output/<name>.plan/ with an example plan.
+// and output/<name>.backlog/ with an example plan.
 // Usage, from scripts/: npm run new-project -- <name>
 
 import { cpSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
@@ -68,6 +68,6 @@ copy(join(kit, "skills-lock.json"), join(target, "skills-lock.json"));
 // The plan for the new repo (milestones and issues), as data only. It stays in the kit,
 // outside output/<name>/. Claude replaces the example files with the plan the user
 // approves, and scripts/setup-github.mjs creates it on GitHub.
-copy(join(kit, "templates", "plan"), join(kit, "output", `${name}.plan`));
+copy(join(kit, "templates", "backlog"), join(kit, "output", `${name}.backlog`));
 
 console.log(`Created ${target}`);

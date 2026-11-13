@@ -13,13 +13,31 @@ Write each one from its template in `templates/` when one exists.
 | `docs/adr/` | Technical | Why each important decision was made, one per file |
 | `.claude/CLAUDE.md` | Claude | The rules for Claude, including the Definition of Done |
 
-## The plan (outside the project folder)
+## The backlog (outside the project folder)
 
-The plan for the new repo stays in the kit, in `output/<name>.plan/`. It is data only:
+The backlog for the new repo stays in the kit, in `output/<name>.backlog/`. It is data only: one JSON file per issue, in `issues/<id>-<type>.json` (e.g. `01-epic.json`, `01-01-technical.json`, `02-01-story.json`). It has no milestones: everything stays in the backlog.
 
-| File | What it contains |
-|---|---|
-| `milestones.json` | The milestones: `id`, `title` and `done` (one line) |
-| `issues/<id>-<type>.json` (e.g. `01-feature.json`, `01-01-task.json`) | One issue: `id`, `type` (`feature`, `task` or `spike`), `milestone`, `title`, the fields of its form in `templates/issue-templates/`, and for a task or spike, `feature` |
+| Field | In | What it contains |
+|---|---|---|
+| `id` | Every issue | The issue's id in the backlog (e.g. `01`, `01-01`) |
+| `type` | Every issue | `epic`, `story` or `technical` |
+| `epic` | Story, technical item | The id of its epic |
+| `title` | Every issue | The issue's title |
+| The fields of its form | Every issue | The fields of its form in `templates/issue-templates/`: `groups` for an epic, `story` for a story, `why` for a technical item |
+| `size` | Story, technical item | `S`, `M` or `L` |
+| `priority` | Story, technical item | `high`, `medium` or `low` |
+| `depends_on` | Story, technical item (optional) | A list of ids from the backlog that must be done first |
 
-`templates/plan/` is the example. `scripts/setup-github.mjs` checks the plan and creates the labels, milestones and issues; it builds each issue body from the form headings.
+Size:
+
+- `S`: 1 or 2 pull requests.
+- `M`: 3 to 5 pull requests.
+- `L`: more; it is split before it enters a sprint.
+
+Priority:
+
+- `high`: the app is useless without it.
+- `medium`: important, but the app already works without it.
+- `low`: nice to have.
+
+`templates/backlog/` is the example, with the "Foundations" epic. `scripts/setup-github.mjs` checks the backlog and creates it on GitHub.

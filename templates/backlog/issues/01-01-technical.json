@@ -1,0 +1,9 @@
+{
+  "id": "01-01",
+  "type": "technical",
+  "epic": "01",
+  "title": "{Set up the deploy pipeline to AWS}",
+  "why": "{So that every push to main is tested and deployed on its own.}",
+  "size": "S",
+  "priority": "high"
+}

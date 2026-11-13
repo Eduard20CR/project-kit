@@ -1,0 +1,10 @@
+{
+  "id": "02-01",
+  "type": "story",
+  "epic": "02",
+  "title": "{Upload up to 10 photos}",
+  "story": "{As a guest, I want to upload up to 10 photos, so that they are in the event gallery.}",
+  "size": "M",
+  "priority": "high",
+  "depends_on": ["01-01"]
+}

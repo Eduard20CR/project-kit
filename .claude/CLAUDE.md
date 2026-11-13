@@ -18,11 +18,11 @@ After that, the new project just codes the issues, and it adds issues or changes
 
 Each step starts with who does it: **User** (the person you work with) or **Claude** (you). Do only the Claude steps. When a step is the user's, tell them exactly what to do and wait until they say it is done.
 
-1. **User: create the project folder.** The user runs `npm run new-project -- <name>` in `scripts/`. It creates `output/<name>/` (the folder structure, the templates in place and the skills) and `output/<name>.plan/` (an example plan). Do not run it yourself: if `output/<name>/` does not exist yet, ask the user to run it.
+1. **User: create the project folder.** The user runs `npm run new-project -- <name>` in `scripts/`. It creates `output/<name>/` (the folder structure, the templates in place and the skills) and `output/<name>.backlog/` (an example plan). Do not run it yourself: if `output/<name>/` does not exist yet, ask the user to run it.
 2. **User and Claude: the interview.** The user types `/grill-with-docs` in the chat to start it. Only the user can start this skill: it is set so that Claude cannot open it on its own. If the user has not typed it yet, ask them to. Then Claude interviews the user with it. It uses the `grilling` and `domain-modeling` skills. Ask one question at a time.
 3. **Claude: write the docs.** Fill in the files in `output/<name>/` from the interview, with the `doc-coauthoring` skill.
-   - Then run `npm run check-placeholders -- <name>` in `scripts/`. It lists every `{placeholder}` left from the templates, with file and line, in two folders: the docs (`output/<name>/`) and the plan (`output/<name>.plan/`).
-   - In this step, fix only the ones in `output/<name>/`. The ones in `output/<name>.plan/` are expected: the plan is still the example until step 6.
+   - Then run `npm run check-placeholders -- <name>` in `scripts/`. It lists every `{placeholder}` left from the templates, with file and line, in two folders: the docs (`output/<name>/`) and the plan (`output/<name>.backlog/`).
+   - In this step, fix only the ones in `output/<name>/`. The ones in `output/<name>.backlog/` are expected: the plan is still the example until step 6.
 4. **User and Claude: review the docs.** Tell the user which files to review (see "How to work": paths and one line each, not their content). Change them until the user says everything is clear.
 5. **User: create the new GitHub repo.** Tell the user that `output/<name>/` is ready, and give them these steps:
    1. On GitHub, create a new, empty repository: no README, no `.gitignore` and no license, so it has nothing that clashes with the files of `output/<name>/`.
@@ -44,7 +44,7 @@ Each step starts with who does it: **User** (the person you work with) or **Clau
 
       This is the one place where the content itself goes in the chat, because the user must approve it before any file is written. Keep it a short list: each milestone with its title and "done", and under it each issue with its id, type, title and feature. The full fields (acceptance criteria, files, references) go only in the JSON files of step 6.3.
    2. **User: approve the plan.** Wait for the user's OK. Change the plan until they approve it. Write no files before that.
-   3. **Claude: write the plan as data** in `output/<name>.plan/`. Write no code and no Markdown files for the plan.
+   3. **Claude: write the plan as data** in `output/<name>.backlog/`. Write no code and no Markdown files for the plan.
       - `milestones.json`: the approved milestones, as `{"id", "title", "done"}`.
       - `issues/`: one JSON file per issue (for example `01-feature.json`, `01-01-task.json`). Each one has `id`, `type` (`feature`, `task` or `spike`), `milestone` (a milestone id), `title`, and the fields of the matching form in `templates/issue-templates/`. `acceptance`, `references`, `files` and `depends_on` are lists. A task or spike that belongs to a feature has `feature` (the feature's id). `depends_on` lists ids from the plan.
       - Replace the example files: delete the ones the plan does not use.
