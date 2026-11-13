@@ -6,12 +6,12 @@ Write each one from its template in `templates/` when one exists.
 
 | File | For | What it contains |
 |---|---|---|
-| `README.md` | Anyone, non-technical | What the app is, how it works, roles, and what is and is not in v1 |
-| `docs/architecture.md` | Technical | How the components connect: C4 levels 1 and 2 in Mermaid, main flows, technologies with their ADRs, the repository folder tree |
-| `docs/data-model.md` | Technical | Tables and relations as a Mermaid `erDiagram`, and why each table exists |
+| `README.md` | Anyone | The project's front door: the vision (the problem, who it is for, what it does and what success looks like), how to run it locally, how it is deployed, and where the rest of the docs are |
+| `docs/non-functional-requirements.md` | Technical | The rules that always apply: security, performance, cost |
+| `docs/architecture.md` | Technical | Where a technical person understands how and why the project is built: the architect's idea, how the pieces fit together, the main flows, and which technologies are used and why. It includes C4 levels 1 (context) and 2 (containers) in Mermaid, to see it visually. It can change during the project |
+| `docs/data-model.md` | Technical | The main database schema. It can change during the project |
 | `docs/adr/` | Technical | Why each important decision was made, one per file |
-| `docs/non-functional-requirements.md` | Technical | Numbers for security, cost, performance, etc. |
-| `.claude/CLAUDE.md` | Claude | Rules for working on the project |
+| `.claude/CLAUDE.md` | Claude | The rules for Claude, including the Definition of Done |
 
 ## The plan (outside the project folder)
 
