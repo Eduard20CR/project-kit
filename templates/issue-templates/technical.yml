@@ -12,3 +12,13 @@ body:
       description: One line (e.g. so that every push to main is tested and deployed on its own).
     validations:
       required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Written in the issue when the technical item is refined, right before building it.
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: Written in the issue when the technical item is refined, right before building it.

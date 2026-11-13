@@ -9,7 +9,7 @@
 //     └── issues/
 //         ├── 01-epic.json           one file per issue
 //         ├── 01-01-technical.json
-//         └── 02-01-story.json
+//         └── 01-02-story.json
 //
 // Usage, from scripts/ (run `npm install` there once first):
 //     npm run setup-github -- <name> <owner>/<repo> --dry-run
@@ -84,7 +84,7 @@ const issueSchema = z.discriminatedUnion(
 );
 
 // The sections of each issue body, in the order of its form: [field, heading].
-// "Acceptance criteria" and "Out of scope" stay empty: they are written when the story is refined.
+// "Acceptance criteria" and "Out of scope" stay empty: they are written when the story or technical item is refined.
 // "Depends on" is not in the forms; it is added at the end when the issue has depends_on.
 const BODY_SECTIONS = {
   epic: [["groups", "What it groups"]],
@@ -96,6 +96,8 @@ const BODY_SECTIONS = {
   ],
   technical: [
     ["why", "Why"],
+    ["acceptance", "Acceptance criteria"],
+    ["out_of_scope", "Out of scope"],
     ["depends_on", "Depends on"],
   ],
 };

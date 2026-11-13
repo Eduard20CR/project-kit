@@ -2,8 +2,8 @@
   "id": "01-01",
   "type": "technical",
   "epic": "01",
-  "title": "{Set up the deploy pipeline to AWS}",
-  "why": "{So that every push to main is tested and deployed on its own.}",
+  "title": "{Set up the photo storage}",
+  "why": "{So that the uploaded photos are kept safe and can be shown in the gallery.}",
   "size": "S",
   "priority": "high"
 }

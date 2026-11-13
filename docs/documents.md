@@ -15,7 +15,7 @@ Write each one from its template in `templates/` when one exists.
 
 ## The backlog (outside the project folder)
 
-The backlog for the new repo stays in the kit, in `output/<name>.backlog/`. It is data only: one JSON file per issue, in `issues/<id>-<type>.json` (e.g. `01-epic.json`, `01-01-technical.json`, `02-01-story.json`). It has no milestones: everything stays in the backlog.
+The backlog for the new repo stays in the kit, in `output/<name>.backlog/`. It is data only: one JSON file per issue, in `issues/<id>-<type>.json` (e.g. `01-epic.json`, `01-01-technical.json`, `01-02-story.json`). It has no milestones: everything stays in the backlog.
 
 | Field | In | What it contains |
 |---|---|---|
@@ -40,4 +40,4 @@ Priority:
 - `medium`: important, but the app already works without it.
 - `low`: nice to have.
 
-`templates/backlog/` is the example, with the "Foundations" epic. `scripts/setup-github.mjs` checks the backlog and creates it on GitHub.
+`templates/backlog/` is the example: one epic with one technical item and one story. `scripts/setup-github.mjs` checks the backlog and creates it on GitHub.
