@@ -22,7 +22,7 @@ erDiagram
 
 | Entity | Why it exists |
 |--------|---------------|
-| {ENTITY} | {What it stores and which requirement (FR-XX) needs it} |
+| {ENTITY} | {What it stores and why the app needs it} |
 
 <!--
 Replace the example entities. Add one row per entity in the Entities table. Put constraints and allowed values in the attribute comment.

@@ -3,7 +3,7 @@
 This repo gets a new project ready before any code is written:
 
 1. Interview the user about the project.
-2. Write the docs and edit the file in the project folder.
+2. Write the docs and edit the files in the project folder.
 3. Plan the work on GitHub: the labels and the backlog (epics, stories and technical items).
 
 After that, the new project just codes the issues, and it adds issues or changes the docs only when the user asks for it.

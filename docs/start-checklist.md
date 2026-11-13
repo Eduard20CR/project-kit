@@ -33,6 +33,6 @@ The user's checklist for starting a new project: go through it to be sure you fo
 
 - [ ] Created the coder task from `templates/coder-task.md`.
 - [ ] Created the QA task from `templates/qa-task.md`, with its trigger and filters.
-- [ ] Test run: **Run now** on the coder task opens a pull request for a first task, and the QA task labels it `risk:*` and comments on it.
+- [ ] Test run, once the first sprint has a refined task: **Run now** on the coder task opens a pull request for it, and the QA task labels it `risk:*` and comments on it.
 
 Left out on purpose: the initial setup (CI, deploy, environments). The user does it before the first sprint.

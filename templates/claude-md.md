@@ -12,7 +12,8 @@
 
 ## Workflow
 
-- Work is grouped Scrum style: an epic groups stories and technical items; each story or technical item is split into tasks (sub-issues), one pull request each. A sprint is a milestone; the backlog is every issue without a milestone. Code tasks, not stories.
+- Work is grouped Scrum style: an epic groups stories and technical items; each story or technical item is split into tasks (sub-issues), one pull request each. A sprint is a milestone; the backlog is every issue without a milestone. Code tasks, not stories or technical items.
+- Only the user plans sprints: they create the sprint's milestone, choose which issues go into it and decide when they are coded. Never create a milestone, and never add an issue to a sprint or take one out of it.
 - One branch and one pull request per task. Never push to `main`, never merge.
 - Write the pull request body with `.github/pull_request_template.md`: the Overview in Spanish, the rest in English.
 - Before pushing, run the checks that already exist in the project and apply to the change (for example lint, typecheck, tests, build).
@@ -22,14 +23,14 @@
   - An issue uses the matching form in `.github/ISSUE_TEMPLATE/`, one `type:*` label and, for a story or technical item, a `size:*` and a `priority:*` label. Never put `risk:*` labels on issues: they are for pull requests.
   - Docs changes go through a pull request. A changed decision is a new ADR.
 
-## Refining a story
+## Refining a story or technical item
 
-A story is detailed right before it is built, when the user asks to refine it (for example, "refine #12"):
+A story or technical item is detailed right before it is built, when the user asks to refine it (for example, "refine #12"). Both are refined the same way:
 
-1. Use the `grilling` skill to ask the user questions until there are no doubts left about the story.
-2. Write in the story's issue the acceptance criteria and what is out of scope.
-3. Create the tasks with the task form in `.github/ISSUE_TEMPLATE/`, as sub-issues of the story, one pull request each.
-4. Check the size: if it comes out L, propose splitting the story.
+1. Use the `grilling` skill to ask the user questions until there are no doubts left about it.
+2. Write in its issue the acceptance criteria and what is out of scope.
+3. Create the tasks with the task form in `.github/ISSUE_TEMPLATE/`, as its sub-issues, one pull request each. Do not add them to a sprint: the user does.
+4. Check the size: if it comes out L, propose splitting it.
 
 ## Building a task
 

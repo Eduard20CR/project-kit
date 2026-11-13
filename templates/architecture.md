@@ -63,5 +63,5 @@ infra/
   bootstrap/        {Resources created once}
   modules/          {Reusable Terraform modules}
   environments/     {One folder per environment}
-docs/               {Requirements, architecture, data model and ADRs}
+docs/               {Non-functional requirements, architecture, data model and ADRs}
 ```

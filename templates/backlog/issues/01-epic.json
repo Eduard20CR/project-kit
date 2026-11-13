@@ -1,6 +1,6 @@
 {
   "id": "01",
   "type": "epic",
-  "title": "Foundations",
-  "groups": "Before building the first story, everything is left ready and well organized so that the rest moves forward without stumbling."
+  "title": "{Photo upload}",
+  "groups": "{Everything the guest needs to upload their photos.}"
 }
