@@ -15,6 +15,8 @@ Skills in `.claude/skills/`:
 - `grill-with-docs`: interviews the user about the project. It uses `grilling` and `domain-modeling`, which also write the glossary and ADRs.
 - `doc-coauthoring`: writes the docs with the user, section by section.
 - `to-tickets`: breaks the work into the backlog, with what blocks what, and asks the user until they approve it.
+- `implement`: builds a task, from the test to the code. It uses `tdd`.
+- `tdd`: writes the tests first, one at a time, at the seams the user agrees on.
 
 Templates in `templates/`: one per document, so every project's docs look the same.
 

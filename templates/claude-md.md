@@ -31,6 +31,18 @@ A story is detailed right before it is built, when the user asks to refine it (f
 3. Create the tasks with the task form in `.github/ISSUE_TEMPLATE/`, as sub-issues of the story, one pull request each.
 4. Check the size: if it comes out L, propose splitting the story.
 
+## Building a task
+
+One recipe for a task: read the task, write the test in its own commit, write the code, run the checks and open the pull request. It is used in two ways: with the user in the console for the hard ones (pair programming), or by the automatic coder task for the simple ones.
+
+With the user, the user types `/implement #n` (only the user can start this skill). Then:
+
+1. Create the task's branch.
+2. Follow the `implement` skill. It uses the `tdd` skill, which asks the user which seams to test before writing any test.
+3. Commit each failing test in its own commit, before the code that makes it pass.
+4. Run the checks. At the end, `implement` reviews the work with `/code-review`.
+5. Open the pull request, as in "Workflow".
+
 ## Definition of Done
 
 What every pull request meets to be done:
