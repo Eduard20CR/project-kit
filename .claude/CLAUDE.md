@@ -31,6 +31,7 @@ Each step starts with who does it: **User** (the person you work with) or **Clau
    4. Commit and push to `main`.
    5. Tell Claude the repo as `<owner>/<repo>` (for example `my-org/my-app`). Step 5 needs it.
 5. **Write the backlog for the new repo, from this repo.** You never create anything on GitHub: in step 6, the user runs a script that does it.
+   The user types `/to-tickets` in the chat to start it (only the user can start this skill). Follow its method (vertical slices, what blocks what, quiz the user until they approve), with the epics, stories, technical items, sizes and priorities of this step. At the end, do not publish the tickets: write the JSON files of step 5.3. "Blocked by" goes in `depends_on`.
    1. **Claude: propose the backlog in the chat.** Propose the epics, the stories and the technical items, each story and technical item with its size and its priority (`docs/documents.md` says what each size and priority means). What each type is:
       - **Epic**: groups large work. It never goes into a sprint whole: its children do.
       - **Story**: something the user notices. Child of an epic. "As a <role>, I want (or need) <action>, so that <benefit>."
