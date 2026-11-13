@@ -30,7 +30,7 @@ Scripts in `scripts/`, a small Node.js project (the user runs `npm install` ther
 3. Claude fills in the docs in `output/<name>/` from the interview.
 4. The user and Claude review all the docs together, until everything is clear.
 5. The user creates a new, empty GitHub repo (no README, `.gitignore` or license), clones it, copies everything inside `output/<name>/` to its root (including hidden folders like `.claude/` and `.github/`), commits and pushes to `main`. Then the user tells Claude the repo as `<owner>/<repo>`.
-6. Claude proposes the milestones, features, tasks and spikes. Once the user approves them, Claude writes them as JSON files in `output/<name>.plan/`.
+6. Claude proposes the milestones, features, tasks and spikes. Once the user approves them, Claude writes them as JSON files in `output/<name>.backlog/`.
 7. In `scripts/`, the user runs `npm run setup-github -- <name> <owner>/<repo>` once (adding `--dry-run` first shows what it will create): it checks the plan and creates the labels, milestones and issues in the new repo. It needs the GitHub CLI (`gh`) logged in.
 8. The user creates a scheduled task on claude.ai for the new repo and pastes the prompt from [templates/coder-task.md](templates/coder-task.md). The user runs it with **Run now**: it codes up to 5 issues, one pull request each.
 9. The user creates a second scheduled task with the settings and prompt from [templates/qa-task.md](templates/qa-task.md). It runs on its own when a pull request opens: it labels it `risk:low`, `risk:medium` or `risk:high` and comments a summary in Spanish and the details in English. It never merges.

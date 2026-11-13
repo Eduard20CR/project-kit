@@ -4,7 +4,7 @@
 // The plan is data only. Claude fills it in from the plan the user approves; this script
 // never changes per project.
 //
-//     output/<name>.plan/
+//     output/<name>.backlog/
 //     ├── milestones.json      [{ "id": "M0", "title": "M0 Foundation", "done": "..." }]
 //     └── issues/
 //         ├── 01-feature.json  one file per issue
@@ -13,7 +13,7 @@
 // Usage, from scripts/ (run `npm install` there once first):
 //     npm run setup-github -- <name> <owner>/<repo> --dry-run
 //     npm run setup-github -- <name> <owner>/<repo>
-// It reads the plan in output/<name>.plan/.
+// It reads the plan in output/<name>.backlog/.
 //
 // What it does:
 // 1. Checks the whole plan. If anything is wrong, it prints every problem and creates nothing.
@@ -378,7 +378,7 @@ if (!name || !repo || rest.length || !/^[\w.-]+\/[\w.-]+$/.test(repo)) {
   process.exit(1);
 }
 
-const planDir = join(import.meta.dirname, "..", "output", `${name}.plan`);
+const planDir = join(import.meta.dirname, "..", "output", `${name}.backlog`);
 
 const { milestones, issues } = loadPlan(planDir);
 if (dryRun) {

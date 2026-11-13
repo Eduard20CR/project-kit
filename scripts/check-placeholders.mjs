@@ -2,7 +2,7 @@
 // Finds the template placeholders, like {Project name}, still left in a new project's docs
 // and plan, and prints where each one is.
 // Usage, from scripts/: npm run check-placeholders -- <name>
-// It reads output/<name>/ and output/<name>.plan/. It exits with an error if it finds any.
+// It reads output/<name>/ and output/<name>.backlog/. It exits with an error if it finds any.
 
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join, relative } from "node:path";
@@ -14,7 +14,7 @@ if (!name || rest.length) {
 }
 
 const output = join(import.meta.dirname, "..", "output");
-const roots = [join(output, name), join(output, `${name}.plan`)];
+const roots = [join(output, name), join(output, `${name}.backlog`)];
 
 // A placeholder is text in braces that starts with a letter and has no quotes,
 // e.g. {Short title}. This skips JSON objects ({ "id": ... }) and code ({ return x; }).
