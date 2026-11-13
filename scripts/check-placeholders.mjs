@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Finds the template placeholders, like {Project name}, still left in a new project's docs
-// and plan, and prints where each one is.
+// and backlog, and prints where each one is.
 // Usage, from scripts/: npm run check-placeholders -- <name>
 // It reads output/<name>/ and output/<name>.backlog/. It exits with an error if it finds any.
 
