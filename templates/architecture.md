@@ -1,6 +1,14 @@
 # Architecture
 
-## System context (C4 level 1)
+## The idea
+
+{The architect's idea, in a few lines: how the project is built and why.}
+
+## How the pieces fit together
+
+{How the pieces fit together. The C4 model, levels 1 and 2, shows it visually.}
+
+### System context (C4 level 1)
 
 {Who uses the system and which external systems it talks to.}
 
@@ -13,7 +21,7 @@ C4Context
   Rel(app, ext, "{Calls}")
 ```
 
-## Containers (C4 level 2)
+### Containers (C4 level 2)
 
 {The deployable parts (web, api, database, workers) and how they connect.}
 
@@ -38,9 +46,9 @@ C4Container
 
 ## Technologies
 
-| Part | Technology | ADR |
-|---|---|---|
-| {Frontend} | {Tech and version} | [NNNN](adr/NNNN-slug.md) |
+| Part | Technology | Why | ADR |
+|---|---|---|---|
+| {Frontend} | {Tech and version} | {Why it was chosen} | [NNNN](adr/NNNN-slug.md) |
 
 The API contract lives in code (for example OpenAPI); link it here instead of copying it.
 

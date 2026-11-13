@@ -1,30 +1,34 @@
 # {Project name}
 
-{One sentence: who uses it and what problem it solves.}
+## Vision
 
-## How it works
+### Problem
 
-1. {Step the user takes.}
-2. {Next step.}
+{The problem the project solves.}
 
-## Roles
+### Who it is for
 
-| Role | Who | Can |
-|---|---|---|
-| {Role} | {Who they are} | {What they can do} |
+{Who uses it.}
 
-## Scope
+### What it does
 
-**Included in v1:** {feature} · {feature}
+{What it does, in a few lines.}
 
-**Not in v1:** {feature} · {feature}
+### Success
+
+{How we know it worked.}
+
+## How to run it locally
+
+1. {Step to run the project on your computer.}
+
+## How it is deployed
+
+{How a change gets to production.}
 
 ## Documentation
 
+- [Non-functional requirements](docs/non-functional-requirements.md)
 - [Architecture](docs/architecture.md)
 - [Data model](docs/data-model.md)
-- [Functional requirements](docs/requirements/functional.md)
-- [Non-functional requirements](docs/requirements/non-functional.md)
 - [Decisions (ADR)](docs/adr/)
-- [Spikes](docs/spikes/)
-- [Milestone logs](docs/milestones/)
