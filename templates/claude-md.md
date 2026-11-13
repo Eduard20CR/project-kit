@@ -22,6 +22,15 @@
   - An issue uses the matching form in `.github/ISSUE_TEMPLATE/`, one `type:*` label and, for a story or technical item, a `size:*` and a `priority:*` label. Never put `risk:*` labels on issues: they are for pull requests.
   - Docs changes go through a pull request. A changed decision is a new ADR.
 
+## Refining a story
+
+A story is detailed right before it is built, when the user asks to refine it (for example, "refine #12"):
+
+1. Use the `grilling` skill to ask the user questions until there are no doubts left about the story.
+2. Write in the story's issue the acceptance criteria and what is out of scope.
+3. Create the tasks with the task form in `.github/ISSUE_TEMPLATE/`, as sub-issues of the story, one pull request each.
+4. Check the size: if it comes out L, propose splitting the story.
+
 ## Definition of Done
 
 What every pull request meets to be done:
