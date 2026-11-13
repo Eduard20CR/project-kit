@@ -51,6 +51,7 @@ Docs changes in the new project always go through a pull request. Its autonomous
 All files of a new project go in `output/<name>/`, never anywhere else in this repo. `output/` is in `.gitignore`.
 Follow `docs/documents.md` and `docs/project-structure.md`. All docs are in English.
 A kit template in `templates/` wins over a skill's own format (for example, `domain-modeling`'s ADR format).
+The skills from mattpocock/skills are used as they are. Ignore what they say about things the kit does not have: the `/setup-matt-pocock-skills` command, the `ready-for-agent` label and the `codebase-design` skill.
 
 ## How to work
 

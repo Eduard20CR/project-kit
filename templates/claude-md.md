@@ -6,6 +6,8 @@
 
 `docs/` is the source of truth. Read the parts that apply before working on anything.
 
+The skills in `.claude/skills/` from mattpocock/skills are used as they are. Ignore what they say about things this project does not have: the `/setup-matt-pocock-skills` command, the `ready-for-agent` label and the `codebase-design` skill.
+
 ## Language
 
 - English in the repo: code, docs, commits and pull requests (except the pull request Overview, in Spanish).
