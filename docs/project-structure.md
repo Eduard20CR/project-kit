@@ -22,10 +22,6 @@ scripts/                    helper scripts
 docs/
   architecture.md           components, C4 levels 1-2 in Mermaid, flows, repo tree
   data-model.md             Mermaid erDiagram
-  requirements/
-    functional.md           FR-XX with acceptance criteria
-    non-functional.md       NFR-<AREA>-XX
+  non-functional-requirements.md  NFR-<AREA>-XX
   adr/                      one decision per file
-  spikes/                   investigations behind decisions
-  milestones/               one closing log per closed milestone
 ```
