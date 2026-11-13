@@ -1,0 +1,14 @@
+name: Epic
+description: Groups large work. It never goes into a sprint whole; its children do.
+labels: ["type:epic"]
+body:
+  - type: markdown
+    attributes:
+      value: "The title is a short name (e.g. Photo upload)."
+  - type: textarea
+    id: groups
+    attributes:
+      label: What it groups
+      description: One line of what it groups (e.g. everything the guest needs to upload their photos).
+    validations:
+      required: true

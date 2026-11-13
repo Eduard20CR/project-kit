@@ -7,7 +7,7 @@ New projects use this folder structure. Folders marked "only if it applies" are 
 .claude/skills/             skills for Claude, copied from the kit
 skills-lock.json            skill versions, for `npx skills update`
 .github/workflows/          CI and deploy
-.github/ISSUE_TEMPLATE/     issue forms: feature, task, bug, spike
+.github/ISSUE_TEMPLATE/     issue forms: epic, story, technical, task, bug, spike, retro
 .github/pull_request_template.md  pull request body: Spanish overview, English detail
 README.md                   front door: vision, how to run and deploy, where the docs are
 apps/
