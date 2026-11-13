@@ -11,14 +11,19 @@ Task settings:
 You are coding issues on the repository {owner}/{repo}.
 
 1. Fetch the latest `main` and read `.claude/CLAUDE.md`. Follow it. `docs/` is the source of truth.
-2. Pick up to 5 qualifying issues, lowest milestone first. An issue qualifies only if:
+2. Pick up to 5 qualifying issues from the current sprint. An issue qualifies only if:
    - it is labeled `type:task` (stories are not coded, their tasks are);
-   - its milestone is the lowest open milestone that still has qualifying work;
+   - its milestone is the current sprint: the open milestone (if more than one is open, the oldest one);
    - it is not labeled `blocked` or `manual-step`;
    - every issue in its "Depends on" field is closed;
    - no open pull request already says `Closes #<n>` for it.
 3. Work on the issues one after the other. Each one gets its own branch from the latest `origin/main`, its own commits and its own pull request. Never stack a branch on another unmerged branch.
-4. Before coding an issue, read its goal, its acceptance criteria and its comments (a comment may hold the user's answer to an earlier `blocked`). Read other docs only when the issue points to them or the work needs them. The pull request must meet every acceptance criterion.
+4. Build each task with the recipe in the "Building a task" section of `.claude/CLAUDE.md`:
+   - Read the task: its goal, its acceptance criteria and its comments (a comment may hold the user's answer to an earlier `blocked`). Read other docs only when the issue points to them or the work needs them.
+   - Follow `.claude/skills/implement/SKILL.md`, which uses `.claude/skills/tdd/SKILL.md`. Read them as files: `implement` can only be started by the user.
+   - No user is present: where `tdd` asks the user which seams to test, choose them yourself from the task's acceptance criteria, and list them in the pull request.
+   - Commit each failing test in its own commit, before the code that makes it pass.
+   - The pull request must meet every acceptance criterion.
 5. Write each pull request body with `.github/pull_request_template.md`: the Overview in Spanish, the rest in English, and `Closes #<n>` with the issue number.
 6. Before each pull request, run the checks that already exist in the project and apply to the change (for example lint, typecheck, tests, build). If none exist yet, say so in the Verification section. Do not open a pull request whose checks fail.
 7. Never write or change docs, requirements, ADRs or issues. If an issue needs a decision the docs do not cover, conflicts with the docs, or cannot be finished, do not open a pull request: comment on the issue explaining why, add the `blocked` label and go on to the next issue.
