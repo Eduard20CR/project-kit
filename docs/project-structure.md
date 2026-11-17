@@ -10,6 +10,7 @@ skills-lock.json            skill versions, for `npx skills update`
 .github/ISSUE_TEMPLATE/     issue forms: epic, story, technical, task, bug, spike, retro
 .github/pull_request_template.md  pull request body: Spanish overview, English detail
 README.md                   front door: vision, how to run and deploy, where the docs are
+GLOSSARY.md                 the project's words and what they mean (written by domain-modeling)
 apps/
   <app>/                    one folder per app the project needs, e.g. web/, api/, worker/
 shared/                     types and constants shared by the apps (only if it applies)

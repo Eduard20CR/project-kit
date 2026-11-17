@@ -28,6 +28,7 @@
 
 ## Documentation
 
+- [Glossary](GLOSSARY.md)
 - [Non-functional requirements](docs/non-functional-requirements.md)
 - [Architecture](docs/architecture.md)
 - [Data model](docs/data-model.md)
